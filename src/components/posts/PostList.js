@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { getPosts } from "../../managers/PostsManger"
 
 export const AllPosts = () => {
@@ -8,7 +9,7 @@ export const AllPosts = () => {
 
     useEffect(
         () => {
-           getPosts()
+            getPosts()
                 .then((allPostsArray) => {
                     setAllPosts(allPostsArray)
                 })
@@ -18,7 +19,7 @@ export const AllPosts = () => {
 
     useEffect(
         () => {
-            const sortPosts = allPosts.sort((a,b) => b.publication_date - a.publication_date)
+            const sortPosts = allPosts.sort((a, b) => b.publication_date - a.publication_date)
             setDateSortedPosts(sortPosts)
         }
     )
@@ -28,13 +29,13 @@ export const AllPosts = () => {
         {
             dateSortedPosts.map(
                 (dateSortedPost) => {
-                    return <section className="postDetails">
-                        <div className="titleDiv">Title: {dateSortedPost.title}</div>
+                    return <section className="postDetails" key={`task--${dateSortedPost.id}`}>
+                        <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
                         <div className="authorDiv">Author: {dateSortedPost.user_id}</div>
                         <div className="categoryDiv">Category: {dateSortedPost.category}</div>
                         <div className="contentDiv">Content: {dateSortedPost.content}</div>
                         <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
-                    </section>  
+                    </section>
                 }
             )
         }
