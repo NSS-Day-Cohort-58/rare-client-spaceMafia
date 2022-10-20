@@ -3,6 +3,7 @@ import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 
 import { CategoryList } from "../components/categories/CategoryList"
+import { AddPost } from "../components/posts/PostForm"
 
 import { AllPosts } from "../components/posts/PostList"
 
@@ -21,6 +22,7 @@ export const ApplicationViews = ({ token, setToken }) => {
           <Route path="/categories" element={<CategoryList/>} />
 
           <Route path="/posts" element={<AllPosts/>} />
+          <Route path="/newPosts" element={<AddPost/>} />
         
 
       </Route>
