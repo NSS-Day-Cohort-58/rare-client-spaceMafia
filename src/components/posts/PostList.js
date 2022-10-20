@@ -18,7 +18,7 @@ export const AllPosts = () => {
 
     useEffect(
         () => {
-            const sortPosts = allPosts.sort((a,b) => a.publication_date = b.publication_date)
+            const sortPosts = allPosts.sort((a,b) => b.publication_date - a.publication_date)
             setDateSortedPosts(sortPosts)
         }
     )
