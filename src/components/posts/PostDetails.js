@@ -4,18 +4,8 @@ import { getPostById, getPosts } from "../../managers/PostsManger"
 
 export const PostDetails = () => {
 
-    const [posts, setPosts] = useState([])
+    const [posts, setPosts] = useState({})
     const { postId } = useParams()
-
-    useEffect(
-        () => {
-            getPosts()
-                .then((postArray) => {
-                    setPosts(postArray)
-                })
-        },
-        []
-    )
 
 
     useEffect(() => {
