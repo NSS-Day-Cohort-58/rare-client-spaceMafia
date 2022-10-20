@@ -15,6 +15,7 @@ export const TagList = () => {
     )
 
     return <section className="tags__list">
+        <h2 className="tag__header title">Tags</h2>
         {
             tags.map(tag => {
                 return <div key={`tag--${tag.id}`} className="tag">

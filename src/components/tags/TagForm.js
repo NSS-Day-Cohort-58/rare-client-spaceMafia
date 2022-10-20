@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { createTag } from "../../managers/TagManager"
+import './TagForm.css'
 
 export const TagForm = () => {
 
@@ -19,7 +20,7 @@ export const TagForm = () => {
     }
 
     return <form className="tag__form">
-        <h2>Create a New Tag</h2>
+        <h2 className="subtitle">Create a New Tag</h2>
         <fieldset>
                 <label htmlFor="label"></label>
                 <input

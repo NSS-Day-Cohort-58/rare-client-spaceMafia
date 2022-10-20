@@ -1,5 +1,6 @@
 import { TagForm } from "./TagForm"
 import { TagList } from "./TagList"
+import './TagContainer.css'
 
 export const TagContainer = () => {
 
