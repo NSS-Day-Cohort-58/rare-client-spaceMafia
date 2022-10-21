@@ -3,6 +3,10 @@
     flex-direction: column;
 }
 
+.tag__header{
+    text-align: center;
+}
+
 .tag{
     padding: 2rem;
     margin: 0.5rem;

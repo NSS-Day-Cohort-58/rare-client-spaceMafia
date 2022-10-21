@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
 import { getTags } from "../../managers/TagManager"
 import './TagList.css'
 
 export const TagList = () => {
     
     const [tags, setTags] = useState([])
-    const navigate = useNavigate()
     
     useEffect(
         () => {
@@ -17,6 +15,7 @@ export const TagList = () => {
     )
 
     return <section className="tags__list">
+        <h2 className="tag__header title">Tags</h2>
         {
             tags.map(tag => {
                 return <div key={`tag--${tag.id}`} className="tag">
