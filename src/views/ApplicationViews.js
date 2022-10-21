@@ -2,12 +2,11 @@ import { Route, Routes } from "react-router-dom"
 import { Login } from "../components/auth/Login"
 import { Register } from "../components/auth/Register"
 import { PostDetails } from "../components/posts/PostDetails"
-import { CategoryList } from "../components/categories/CategoryList"
 import { AddPost } from "../components/posts/PostForm"
 import { AllPosts } from "../components/posts/PostList"
-import { TagList } from "../components/tags/TagList"
 import { TagContainer } from "../components/tags/TagContainer"
 import { Authorized } from "./Authorized"
+import { CategoryContainer } from "../components/categories/CategoryContainer"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -19,7 +18,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/tags" element={<TagContainer/>} />
         <Route path="/posts" element={<AllPosts />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
-        <Route path="/categories" element={<CategoryList />} />
+        <Route path="/categories" element={<CategoryContainer />} />
         <Route path="/posts" element={<AllPosts />} />
         <Route path="/newPosts" element={<AddPost/>} />
 

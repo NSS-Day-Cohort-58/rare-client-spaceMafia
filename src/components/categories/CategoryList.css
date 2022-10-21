@@ -1,0 +1,23 @@
+.category__label{
+    display: flex;
+    flex-direction: column;
+}
+
+.category{
+    margin: 0.5rem;
+    display: flex;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 5px;
+    width: 50px;
+    text-indent: -20px;
+    padding: 10px 200px;
+    font-size: 20px;
+}
+
+.category_title{
+    display: flex;
+    font-weight: bolder;
+    font-size: 35px;
+    padding: 20px 90px;
+}
