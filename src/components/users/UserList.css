@@ -1,0 +1,26 @@
+.user-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.user{
+    margin: 0.5rem;
+    display: flex;
+    border: 2px solid black;
+    text-align: center;
+    border-radius: 5px;
+    width: 50px;
+    padding: 10px 200px;
+    font-size: 20px;
+}
+
+.user_title{
+    display: flex;
+    font-weight: bolder;
+    font-size: 35px;
+    padding: 20px 90px;
+}
+
+.user_label{
+
+}

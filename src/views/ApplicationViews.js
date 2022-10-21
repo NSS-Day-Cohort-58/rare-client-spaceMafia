@@ -7,6 +7,7 @@ import { AllPosts } from "../components/posts/PostList"
 import { TagContainer } from "../components/tags/TagContainer"
 import { Authorized } from "./Authorized"
 import { CategoryContainer } from "../components/categories/CategoryContainer"
+import { UserList } from "../components/users/UserList"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -21,6 +22,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/categories" element={<CategoryContainer />} />
         <Route path="/posts" element={<AllPosts />} />
         <Route path="/newPosts" element={<AddPost/>} />
+        <Route path="/users" element={<UserList/>} />
 
       </Route>
     </Routes>
