@@ -79,13 +79,13 @@ export const AllPosts = () => {
                         {
                             allUsers.map((user) => {
                                 if (user.id === dateSortedPost.user_id)
-                                    <div className="authorDiv">Author: {user.username}</div>
+                                    return <div className="authorDiv">Author: {user.username}</div>
                             })
                         }
                         {
                             categories.map((category) => {
                                 if (category.id === dateSortedPost.category_id)
-                                <div className="categoryDiv">Category: {category.label}</div>
+                                    return <div className="categoryDiv">Category: {category.label}</div>
                             })
                         }
                         <div className="contentDiv">Content: {dateSortedPost.content}</div>
