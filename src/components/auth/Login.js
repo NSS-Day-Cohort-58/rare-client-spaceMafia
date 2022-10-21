@@ -18,6 +18,10 @@ export const Login = ({ setToken }) => {
 
     loginUser(user).then(res => {
       if ("valid" in res && res.valid) {
+        localStorage.setItem("forum_user", JSON.stringify({
+          id: user.id,
+          username: user.username
+        }))
         setToken(res.token)
         navigate("/")
       }
