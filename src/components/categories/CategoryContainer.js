@@ -1,13 +1,12 @@
-import { useState } from "react"
 import { CategoryForm } from "./CategoryForm"
 import { CategoryList } from "./CategoryList"
+import './CategoryContainer.css'
 
 export const CategoryContainer = () => {
-    const [makeCategories, setMadeCategories] = useState("")
 
-    return <>
-    <CategoryForm setterFunction={setMadeCategories}/>
-    <CategoryList searchCategorysState={makeCategories}/>
-    </>
+    return <section className="category_main">
+    <CategoryForm />
+    <CategoryList />
+    </section>
    
 }
