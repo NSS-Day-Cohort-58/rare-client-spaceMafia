@@ -1,9 +1,10 @@
 import { useEffect, useState, React } from "react"
+import { createCategory } from "../../managers/CategoryManager"
 import './CategoryForm.css'
 
 export const CategoryForm = () => {
     
-    const [category, createCategory] = useState({
+    const [category, makeCategory] = useState({
         label: ""
     })
 
@@ -11,17 +12,17 @@ export const CategoryForm = () => {
     const createCategoryButton = (event) => {
         event.preventDefault()
         
-        // TODO: Create the object to be saved to the API
         const createdCategory = {
             label: category.label  
         }
+
         createCategory(createdCategory)
         .then(() => {window.location.reload()})
 
 } 
 
 return <form className="category_form">
-<h2 className="create-category_title">Create New Category</h2>
+<h2 className="create-category_title">Create a Category</h2>
 <fieldset>
     <label htmlFor="category_label"></label>
     <input 
@@ -35,7 +36,7 @@ return <form className="category_form">
                         (event) => {
                             const copy = structuredClone(category)
                             copy.label = event.target.value
-                            createCategory(copy)
+                            makeCategory(copy)
                         }
                     }  />
 </fieldset>
