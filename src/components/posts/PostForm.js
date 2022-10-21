@@ -54,7 +54,8 @@ export const AddPost = () => {
             .then((tagsArray) => {
                 setTags(tagsArray)
             })
-    })
+    }, []
+    )
 
     const handleButtonClick = (evt) => {
         evt.preventDefault()
