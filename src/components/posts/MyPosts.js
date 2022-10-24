@@ -85,7 +85,8 @@ export const MyPosts = () => {
             dateSortedPosts.map(
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <section className="postDetails" key={`task--${dateSortedPost.id}`}>
+                        return <>
+                        <section className="postDetails" key={`task--${dateSortedPost.id}`}>
                             <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
                             {
                                 allUsers.map((user) => {
@@ -102,17 +103,18 @@ export const MyPosts = () => {
                             <div className="contentDiv">Content: {dateSortedPost.content}</div>
                             <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
                         </section>
+                        <footer className="cardButtons">
+                            <button >
+                                Edit Post
+                            </button>
+                            <button
+                                >
+                                Delete Post
+                            </button>
+                        </footer>
+                </> 
                 }
             )
         }
-        <footer className="cardButtons">
-            <button >
-                Edit Post
-            </button>
-            <button
-                >
-                Delete Post
-            </button>
-        </footer>
     </article>
 }
