@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
 import { getPosts } from "../../managers/PostsManger"
 import { getUsers } from "../../managers/UserManager"
+import "./Posts.css"
 
 export const AllPosts = () => {
 
@@ -55,7 +56,7 @@ export const AllPosts = () => {
 
     return <article className="allPosts">
         <h2 className="postsHeader">Posts: </h2>
-        <button>My Posts</button>
+
         <fieldset>
             <div className="dropDown">
                 <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
@@ -80,24 +81,34 @@ export const AllPosts = () => {
             dateSortedPosts.map(
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <section className="postDetails" key={`task--${dateSortedPost.id}`}>
-                            <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
-                            {
-                                allUsers.map((user) => {
-                                    if (user.id === dateSortedPost.user_id)
-                                        return <div className="authorDiv">Author: {user.username}</div>
-                                })
-                            }
-                            {
-                                categories.map((category) => {
-                                    if (category.id === dateSortedPost.category_id)
-                                        return <div className="categoryDiv" >Category: {category.label}</div>
-                                })
-                            }
-                            <div className="contentDiv">Content: {dateSortedPost.content}</div>
-                            <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
+                        return <section className="postDetails" id="posts__postDetails" key={`post-${dateSortedPost.id}`}>
+                            <div>
+                                <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
+                                {
+                                    allUsers.map((user) => {
+                                        if (user.id === dateSortedPost.user_id)
+                                            return <div className="authorDiv" key={`post--${user.id}`}>Author: {user.username}</div>
+                                    })
+                                }
+                                {
+                                    categories.map((category) => {
+                                        if (category.id === dateSortedPost.category_id)
+                                            return <div className="categoryDiv" key={`post-${category.id}`} >Category: {category.label}</div>
+                                    })
+                                }
+                                <div className="contentDiv">Content: {dateSortedPost.content}</div>
+                                <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
+                                {
+                                    dateSortedPost.user_id === forumUserObject.id
+                                        ? <button>YesWeHEre</button>
+                                        : <></>
+
+                                }
+
+                            </div>
                         </section>
                 }
+
             )
         }
     </article>
