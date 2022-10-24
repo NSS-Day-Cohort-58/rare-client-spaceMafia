@@ -1,0 +1,29 @@
+.user-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.user{
+    margin: 0.5rem;
+    display: flex;
+    border-radius: 5px;
+    width: 400px;
+    font-size: 20px;
+    border: 2px solid black;
+    padding: 2px;
+    inline-size:inherit;
+    overflow: hidden;
+}
+
+.user_title{
+    display: flex;
+    font-weight: bolder;
+    font-size: 35px;
+    padding: 20px 90px;
+}
+
+.user-label, .user-name, .user-email {
+    padding: 4px, 10px;
+    margin-right: 30px;
+    word-spacing: 1px;
+}
