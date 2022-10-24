@@ -82,10 +82,10 @@ export const AllPosts = () => {
             dateSortedPosts.map(
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <section className="postDetails" id="posts__postDetails" key={`post-${dateSortedPost.id}`}>
-                            <form className="box">
+                        return <section className="postDetails columns box is-centered" id="posts__postDetails" key={`post-${dateSortedPost.id}`}>
+                            <form className="">
                                 <div className="columns">
-                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
+                                    <div className="titleDiv column is-one-quarter"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
                                     {
                                         allUsers.map((user) => {
                                             if (user.id === dateSortedPost.user_id)
@@ -98,18 +98,20 @@ export const AllPosts = () => {
                                                 return <div className="categoryDiv column" key={`post-${category.id}`} >Category: {category.label}</div>
                                         })
                                     }
-                                    <div className="contentDiv column">Content: {dateSortedPost.content}</div>
-                                    <div className="column">
-                                        <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
-                                        <div className="">
-                                            {
-                                                dateSortedPost.user_id === forumUserObject.id
-                                                    ? <button className="btn_delete-post" key={`post-${dateSortedPost.id}`} onClick={() => deletePost(dateSortedPost.id).then(() => navigate("/posts"))}>DELETE</button>
-                                                    : <></>
 
-                                            }
-                                        </div>
+                                    <div className="contentDiv column block">Content: {dateSortedPost.content}</div>
+                                    <div className="postFooter column block ">Date: {dateSortedPost.publication_date}</div>
+
+                                    <div className="column is-centered">
+                                        {
+                                            dateSortedPost.user_id === forumUserObject.id
+                                                ? <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={() => deletePost(dateSortedPost.id).then(() => navigate("/posts"))}>DELETE</button>
+                                                : <></>
+
+                                        }
                                     </div>
+
+
                                 </div>
                             </form>
                         </section>
