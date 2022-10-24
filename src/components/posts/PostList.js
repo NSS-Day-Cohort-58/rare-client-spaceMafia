@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
-import { getPosts } from "../../managers/PostsManger"
+import { deletePost, getPosts } from "../../managers/PostsManger"
 import { getUsers } from "../../managers/UserManager"
 import "./Posts.css"
 
@@ -12,6 +12,7 @@ export const AllPosts = () => {
     const [categories, setCategories] = useState([])
     const [categoryId, setCategoryId] = useState(0)
     const [allUsers, setUsers] = useState([])
+    const navigate = useNavigate()
 
     const localForumUser = localStorage.getItem("forum_user")
     const forumUserObject = JSON.parse(localForumUser)
@@ -82,30 +83,35 @@ export const AllPosts = () => {
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
                         return <section className="postDetails" id="posts__postDetails" key={`post-${dateSortedPost.id}`}>
-                            <div>
-                                <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
-                                {
-                                    allUsers.map((user) => {
-                                        if (user.id === dateSortedPost.user_id)
-                                            return <div className="authorDiv" key={`post--${user.id}`}>Author: {user.username}</div>
-                                    })
-                                }
-                                {
-                                    categories.map((category) => {
-                                        if (category.id === dateSortedPost.category_id)
-                                            return <div className="categoryDiv" key={`post-${category.id}`} >Category: {category.label}</div>
-                                    })
-                                }
-                                <div className="contentDiv">Content: {dateSortedPost.content}</div>
-                                <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
-                                {
-                                    dateSortedPost.user_id === forumUserObject.id
-                                        ? <button>YesWeHEre</button>
-                                        : <></>
+                            <form className="box">
+                                <div className="columns">
+                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
+                                    {
+                                        allUsers.map((user) => {
+                                            if (user.id === dateSortedPost.user_id)
+                                                return <div className="authorDiv column" key={`post--${user.id}`}>Author: {user.username}</div>
+                                        })
+                                    }
+                                    {
+                                        categories.map((category) => {
+                                            if (category.id === dateSortedPost.category_id)
+                                                return <div className="categoryDiv column" key={`post-${category.id}`} >Category: {category.label}</div>
+                                        })
+                                    }
+                                    <div className="contentDiv column">Content: {dateSortedPost.content}</div>
+                                    <div className="column">
+                                        <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
+                                        <div className="">
+                                            {
+                                                dateSortedPost.user_id === forumUserObject.id
+                                                    ? <button className="btn_delete-post" key={`post-${dateSortedPost.id}`} onClick={() => deletePost(dateSortedPost.id).then(() => navigate("/posts"))}>DELETE</button>
+                                                    : <></>
 
-                                }
-
-                            </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </section>
                 }
 

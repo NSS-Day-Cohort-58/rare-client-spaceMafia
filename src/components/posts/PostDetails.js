@@ -19,6 +19,9 @@ export const PostDetails = () => {
         approved: false
     })
 
+    const localForumUser = localStorage.getItem("forum_user")
+    const forumUserObject = JSON.parse(localForumUser)
+
     let foundCategory = ""
     if (post.category_id != 0) {
         foundCategory = categories.find(category => category.id === post.category_id)
@@ -102,8 +105,12 @@ export const PostDetails = () => {
             </section>
             <div>
                 <button onClick={() => updateClickStatus(true)}>Edit Post</button>
+                {
+                    post.user_id === forumUserObject.id
+                        ? <button className="btn_delete-post" onClick={() => deletePost(post.id).then(() => navigate("/posts"))}>DELETE</button>
+                        : <></>
+                }
 
-                <button className="btn_delete-post" onClick={() => deletePost(post.id).then(() => navigate("/posts"))}>DELETE</button>
             </div>
         </article>
     }
