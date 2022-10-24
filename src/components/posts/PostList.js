@@ -52,8 +52,14 @@ export const AllPosts = () => {
             setDateSortedPosts(sortPosts)
         }, [allPosts]
     )
-
-
+    //  handles confirmation of deletion via a popup
+    const confirmDelete = (evt, dateSortedPost) => {
+        // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deletePost(dateSortedPost.id).then(() => navigate("/posts"))
+            : <></>
+    }
 
     return <article className="allPosts">
         <h2 className="postsHeader">Posts: </h2>
@@ -82,42 +88,39 @@ export const AllPosts = () => {
             dateSortedPosts.map(
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <section className="postDetails columns box is-centered" id="posts__postDetails" key={`post-${dateSortedPost.id}`}>
-                            <form className="">
-                                <div className="columns">
-                                    <div className="titleDiv column is-one-quarter"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
+                        return <>
+                            <div className="columns box" id="posts__postDetails">
+                                <section className="postDetails column" key={`post-${dateSortedPost.id}`}>
+                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
                                     {
                                         allUsers.map((user) => {
                                             if (user.id === dateSortedPost.user_id)
-                                                return <div className="authorDiv column" key={`post--${user.id}`}>Author: {user.username}</div>
+                                                return <div className="authorDiv has-text-left" key={`post--${user.id}`}>Author: {user.username}</div>
                                         })
                                     }
                                     {
                                         categories.map((category) => {
                                             if (category.id === dateSortedPost.category_id)
-                                                return <div className="categoryDiv column" key={`post-${category.id}`} >Category: {category.label}</div>
+                                                return <div className="categoryDiv has-text-left" key={`post-${category.id}`} >Category: {category.label}</div>
                                         })
                                     }
+                                    <div className="contentDiv has-text-left">Content: {dateSortedPost.content}</div>
+                                    <footer className="postFooter has-text-left ">Date: {dateSortedPost.publication_date}</footer>
+                                </section>
+                                <footer className="">
+                                    {
+                                        dateSortedPost.user_id === forumUserObject.id
+                                            ? <button className="btn_delete-post " onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
+                                            : <></>
 
-                                    <div className="contentDiv column block">Content: {dateSortedPost.content}</div>
-                                    <div className="postFooter column block ">Date: {dateSortedPost.publication_date}</div>
+                                    }
+                                </footer>
+                            </div>
 
-                                    <div className="column is-centered">
-                                        {
-                                            dateSortedPost.user_id === forumUserObject.id
-                                                ? <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={() => deletePost(dateSortedPost.id).then(() => navigate("/posts"))}>DELETE</button>
-                                                : <></>
-
-                                        }
-                                    </div>
-
-
-                                </div>
-                            </form>
-                        </section>
+                        </>
                 }
 
             )
         }
-    </article>
+    </article >
 }
