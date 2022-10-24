@@ -18,7 +18,9 @@ export const PostDetails = () => {
         publication_date: "",
         image_url: "",
         content: "",
-        approved: false
+        approved: false,
+        user: "",
+        category: ""
     })
 
     const localForumUser = localStorage.getItem("forum_user")
@@ -59,8 +61,8 @@ export const PostDetails = () => {
             <button type="button" className="btn__navigate" onClick={() => navigate("/posts")}>Back to Post</button>
             < section className="postDetails columns box" id="posts__postDetails" >
                 <div className="details__title column">Title: {post.title}</div>
-                <div className="details__author--name column">Author: {post.user_id}</div>
-                <div className="details__category column">Category: {post.category_id}</div>
+                <div className="details__author--name column">Author: {post.user.first_name} {post.user.last_name}</div>
+                <div className="details__category column">Category: {post.category.label}</div>
                 <div className="details__publication--date column">Publication Date: {post.publication_date}</div>
                 <div className="details__content column">Content: {post.content}</div>
 
