@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import { getUsers, getUserById } from "../../managers/UserManager"
 import { Link } from "react-router-dom"
+import "./UserDetails.css"
 
 export const UserDetails = () => {
     const [users, setUsers] = useState([])
