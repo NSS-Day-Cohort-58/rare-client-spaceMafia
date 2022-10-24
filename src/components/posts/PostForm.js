@@ -30,8 +30,10 @@ export const AddPost = () => {
     const formatDate = date.toLocaleString('en-us', {
         minimumIntegerDigits: 2
     })
-    const today = year + "-" + month + "-" + formatDate
-    
+    const formatMonth = month.toLocaleString('en-us', {
+        minimumIntegerDigits: 2
+    })
+    const today = year + "-" + formatMonth + "-" + formatDate
 
     const navigate = useNavigate()
     const localForumUser = localStorage.getItem("forum_user")
