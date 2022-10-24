@@ -2,31 +2,6 @@ import { saveEditedPost } from "../../managers/PostsManger"
 
 export const PostEdit = ({post, setPost, renderPost, categories, updateClickStatus}) => {
 
-    let foundCategory = ""
-    if (post.category_id != 0) {
-        foundCategory = categories.find(category => category.id === post.category_id)
-    }
-
-    const formatDate = (input) => {
-        if (!input) {
-            return input
-        }
-        const newDate = input.replace(/[^\d]/g, "")
-        const newDateLength = newDate.length
-        if (newDateLength < 5) { return newDate}
-        if (newDateLength < 7) {
-            return `${newDate.slice(0,4)}-${newDate.slice(4)}`
-        }
-        return `${newDate.slice(0,4)}-${newDate.slice(4, 6)}-${newDate.slice(6,8)}`
-    }
-
-    const handleDateInput = (event) => {
-        const formattedDate = formatDate(event.target.value)
-        const copy = {...post}
-        copy.publication_date = formattedDate
-        setPost(copy)
-    }
-
     const handleSave = (event) => {
         event.preventDefault()   
 
@@ -60,7 +35,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                 }
                             } />
                     </fieldset>
-                    <div>Author: {post.user_id}</div>
+                    <div>Author: {post.user.first_name} {post.user.last_name}</div>
                     <fieldset>
                         <label htmlFor="category">Category: </label>
                         <select
@@ -71,7 +46,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                     setPost(copy)
                                 }}
                             className="form-control">
-                                <option value={post.category_id}>{foundCategory.label}</option>
+                                <option value={post.category_id}>{post.category.label}</option>
                                 {
                                     categories.map(category => <option
                                     key={category.id}
@@ -81,18 +56,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                 }
                         </select>
                     </fieldset>
-                    <fieldset>
-                        <label htmlFor="publicationDate">Publication Date: </label>
-                        <input
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            placeholder={post.publication_date}
-                            value={post.publication_date}
-                            onChange={
-                                (event) => (handleDateInput(event))
-                            } />
-                    </fieldset>
+                    <div>Publication Date: {post.publication_date}</div>
                     <fieldset>
                         <label htmlFor="content">Content: </label>
                         <input
