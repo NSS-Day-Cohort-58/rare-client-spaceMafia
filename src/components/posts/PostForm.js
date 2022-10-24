@@ -93,7 +93,6 @@ export const AddPost = () => {
                 body: JSON.stringify(postTagsToSendToAPI)
             })
                 .then(response => response.json())
-                .then
                 .then (() => {
                     getNewPost()
                 })
@@ -125,7 +124,7 @@ export const AddPost = () => {
                 value={newPost.image_url}
                 onChange={(evt) => {
                     const copy = { ...newPost}
-                    copy.title = evt.target.value
+                    copy.image_url = evt.target.value
                     updateNewPost(copy)
                 }}
             />
@@ -139,7 +138,7 @@ export const AddPost = () => {
                 value={newPost.content}
                 onChange={(evt) => {
                     const copy = { ...newPost}
-                    copy.title = evt.target.value
+                    copy.content = evt.target.value
                     updateNewPost(copy)
                 }}
             />
