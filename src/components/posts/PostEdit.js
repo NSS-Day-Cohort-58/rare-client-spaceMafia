@@ -2,26 +2,6 @@ import { saveEditedPost } from "../../managers/PostsManger"
 
 export const PostEdit = ({post, setPost, renderPost, categories, updateClickStatus}) => {
 
-    const formatDate = (input) => {
-        if (!input) {
-            return input
-        }
-        const newDate = input.replace(/[^\d]/g, "")
-        const newDateLength = newDate.length
-        if (newDateLength < 5) { return newDate}
-        if (newDateLength < 7) {
-            return `${newDate.slice(0,4)}-${newDate.slice(4)}`
-        }
-        return `${newDate.slice(0,4)}-${newDate.slice(4, 6)}-${newDate.slice(6,8)}`
-    }
-
-    const handleDateInput = (event) => {
-        const formattedDate = formatDate(event.target.value)
-        const copy = {...post}
-        copy.publication_date = formattedDate
-        setPost(copy)
-    }
-
     const handleSave = (event) => {
         event.preventDefault()   
 
@@ -76,18 +56,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                 }
                         </select>
                     </fieldset>
-                    <fieldset>
-                        <label htmlFor="publicationDate">Publication Date: </label>
-                        <input
-                            required autoFocus
-                            type="text"
-                            className="form-control"
-                            placeholder={post.publication_date}
-                            value={post.publication_date}
-                            onChange={
-                                (event) => (handleDateInput(event))
-                            } />
-                    </fieldset>
+                    <div>Publication Date: {post.publication_date}</div>
                     <fieldset>
                         <label htmlFor="content">Content: </label>
                         <input
