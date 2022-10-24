@@ -1,0 +1,18 @@
+#posts__postDetails {
+    margin: auto;
+    margin-bottom: 1rem;
+    height: 10%;
+    width: 90%;
+}
+
+.editDropDown {
+    margin-bottom: 1rem;
+}
+
+.btn__navigate {
+    margin-bottom: 1rem;
+}
+
+article {
+    margin: 1rem;
+}

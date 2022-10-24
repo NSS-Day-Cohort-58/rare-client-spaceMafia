@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
-import { getPostById } from "../../managers/PostsManger"
 import { PostEdit } from "./PostEdit"
+import { getPostById, saveEditedPost, deletePost } from "../../managers/PostsManger"
+import "./Posts.css"
 
 export const PostDetails = () => {
 
+    const navigate = useNavigate()
     const { postId } = useParams()
     const [categories, setCategories] = useState([])
     const [clickStatus, updateClickStatus] = useState(false)
@@ -18,6 +20,9 @@ export const PostDetails = () => {
         content: "",
         approved: false
     })
+
+    const localForumUser = localStorage.getItem("forum_user")
+    const forumUserObject = JSON.parse(localForumUser)
 
     const renderPost = () => {
         if (postId) {
@@ -42,16 +47,29 @@ export const PostDetails = () => {
     }, [postId])
 
     const defaultDisplay = () => {
-        return <article className="post_details">
-            <section className="postDetails">
-                <div className="details__title">Title: {post.title}</div>
-                <div className="details__author--name">Author: {post.user_id}</div>
-                <div className="details__category">Category: {post.category_id}</div>
-                <div className="details__publication--date">Publication Date: {post.publication_date}</div>
-                <div className="details__content">Content: {post.content}</div>
-            </section>
-            <button onClick={() => updateClickStatus(true)}>Edit Post</button>
-        </article>
+        return <article className="post_details" >
+            <button type="button" className="btn__navigate" onClick={() => navigate("/posts")}>Back to Post</button>
+            < section className="postDetails columns box" id="posts__postDetails" >
+                <div className="details__title column">Title: {post.title}</div>
+                <div className="details__author--name column">Author: {post.user_id}</div>
+                <div className="details__category column">Category: {post.category_id}</div>
+                <div className="details__publication--date column">Publication Date: {post.publication_date}</div>
+                <div className="details__content column">Content: {post.content}</div>
+
+                <div className="column">
+                    <button onClick={() => updateClickStatus(true)}>Edit Post</button>
+                </div>
+
+                <div className="column">
+                    {
+                        post.user_id === forumUserObject.id
+                            ? <button className="btn_delete-post" onClick={() => deletePost(post.id).then(() => navigate("/posts"))}>DELETE</button>
+                            : <></>
+                    }
+                </div>
+
+            </section >
+        </article >
     }
 
     return <main>
