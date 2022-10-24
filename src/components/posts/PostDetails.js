@@ -46,6 +46,14 @@ export const PostDetails = () => {
 
     }, [postId])
 
+    const confirmDelete = (evt, post) => {
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deletePost(post.id).then(() => navigate("/posts"))
+            : <></>
+    }
+
+
     const defaultDisplay = () => {
         return <article className="post_details" >
             <button type="button" className="btn__navigate" onClick={() => navigate("/posts")}>Back to Post</button>
@@ -63,7 +71,7 @@ export const PostDetails = () => {
                 <div className="column">
                     {
                         post.user_id === forumUserObject.id
-                            ? <button className="btn_delete-post" onClick={() => deletePost(post.id).then(() => navigate("/posts"))}>DELETE</button>
+                            ? <button className="btn_delete-post" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
                             : <></>
                     }
                 </div>
@@ -76,12 +84,12 @@ export const PostDetails = () => {
         <h2>Post Details:</h2>
         {
             clickStatus
-            ? <PostEdit post={post} 
-            setPost={setPost} 
-            renderPost={renderPost} 
-            categories={categories}
-            updateClickStatus={updateClickStatus}/>
-            : defaultDisplay()
+                ? <PostEdit post={post}
+                    setPost={setPost}
+                    renderPost={renderPost}
+                    categories={categories}
+                    updateClickStatus={updateClickStatus} />
+                : defaultDisplay()
         }
     </main>
 

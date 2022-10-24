@@ -52,8 +52,14 @@ export const AllPosts = () => {
             setDateSortedPosts(sortPosts)
         }
     )
-
-
+    //  handles confirmation of deletion via a popup
+    const confirmDelete = (evt, dateSortedPost) => {
+        // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deletePost(dateSortedPost.id).then(() => navigate("/posts"))
+            : <></>
+    }
 
     return <article className="allPosts">
         <h2 className="postsHeader">Posts: </h2>
@@ -105,13 +111,11 @@ export const AllPosts = () => {
                                     <div className="column is-centered">
                                         {
                                             dateSortedPost.user_id === forumUserObject.id
-                                                ? <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={() => deletePost(dateSortedPost.id).then(() => navigate("/posts"))}>DELETE</button>
+                                                ? <button className="btn_delete-post " onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
                                                 : <></>
 
                                         }
                                     </div>
-
-
                                 </div>
                             </form>
                         </section>
