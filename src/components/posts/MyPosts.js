@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
 import { deletePost, getPosts } from "../../managers/PostsManger"
 import { getUsers } from "../../managers/UserManager"
+import "./Posts.css"
 
 export const MyPosts = () => {
 
@@ -97,29 +98,31 @@ export const MyPosts = () => {
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
                         return <>
-                            <section className="postDetails" key={`post--${dateSortedPost.id}`}>
-                                <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`}>Title: {dateSortedPost.title}</Link></div>
-                                {
-                                    allUsers.map((user) => {
-                                        if (user.id === dateSortedPost.user_id)
-                                            return <div className="authorDiv" key={`category--${user.id}`}>Author: {user.username}</div>
-                                    })
-                                }
-                                {
-                                    categories.map((category) => {
-                                        if (category.id === dateSortedPost.category_id)
-                                            return <div className="categoryDiv" key={`category--${category.id}`}>Category: {category.label}</div>
-                                    })
-                                }
-                                <div className="contentDiv" >Content: {dateSortedPost.content}</div>
-                                <footer className="postFooter" >Date: {dateSortedPost.publication_date}</footer>
-                            </section>
-                            <footer className="cardButtons">
-                                <button>
-                                    Edit Post
-                                </button>
-                                <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>Delete Post </button>
-                            </footer>
+                            <div className=" columns box" id="post__myPost">
+                                <section className="postDetails column" key={`post--${dateSortedPost.id}`}>
+                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`}>Title: {dateSortedPost.title}</Link></div>
+                                    {
+                                        allUsers.map((user) => {
+                                            if (user.id === dateSortedPost.user_id)
+                                                return <div className="authorDiv has-text-left" key={`category--${user.id}`}>Author: {user.username}</div>
+                                        })
+                                    }
+                                    {
+                                        categories.map((category) => {
+                                            if (category.id === dateSortedPost.category_id)
+                                                return <div className="categoryDiv has-text-left" key={`category--${category.id}`}>Category: {category.label}</div>
+                                        })
+                                    }
+                                    <div className="contentDiv has-text-left" >Content: {dateSortedPost.content}</div>
+                                    <footer className="postFooter has-text-left" >Date: {dateSortedPost.publication_date}</footer>
+                                </section>
+                                <footer className="cardButtons">
+                                    <button>
+                                        Edit Post
+                                    </button>
+                                    <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>Delete Post </button>
+                                </footer>
+                            </div>
                         </>
                 }
             )
