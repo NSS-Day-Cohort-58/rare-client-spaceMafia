@@ -6,6 +6,7 @@ import { AddPost } from "../components/posts/PostForm"
 import { AllPosts } from "../components/posts/PostList"
 import { TagContainer } from "../components/tags/TagContainer"
 import { Authorized } from "./Authorized"
+import { MyPosts } from "../components/posts/MyPosts"
 import { CategoryContainer } from "../components/categories/CategoryContainer"
 import { UserList } from "../components/users/UserList"
 
@@ -23,6 +24,7 @@ export const ApplicationViews = ({ token, setToken }) => {
         <Route path="/posts" element={<AllPosts />} />
         <Route path="/newPosts" element={<AddPost/>} />
         <Route path="/users" element={<UserList/>} />
+        <Route path="/myPosts" element={<MyPosts/>} />
 
       </Route>
     </Routes>
