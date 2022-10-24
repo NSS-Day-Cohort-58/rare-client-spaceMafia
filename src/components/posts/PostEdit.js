@@ -2,11 +2,6 @@ import { saveEditedPost } from "../../managers/PostsManger"
 
 export const PostEdit = ({post, setPost, renderPost, categories, updateClickStatus}) => {
 
-    let foundCategory = ""
-    if (post.category_id != 0) {
-        foundCategory = categories.find(category => category.id === post.category_id)
-    }
-
     const formatDate = (input) => {
         if (!input) {
             return input
@@ -60,7 +55,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                 }
                             } />
                     </fieldset>
-                    <div>Author: {post.user_id}</div>
+                    <div>Author: {post.user.first_name} {post.user.last_name}</div>
                     <fieldset>
                         <label htmlFor="category">Category: </label>
                         <select
@@ -71,7 +66,7 @@ export const PostEdit = ({post, setPost, renderPost, categories, updateClickStat
                                     setPost(copy)
                                 }}
                             className="form-control">
-                                <option value={post.category_id}>{foundCategory.label}</option>
+                                <option value={post.category_id}>{post.category.label}</option>
                                 {
                                     categories.map(category => <option
                                     key={category.id}
