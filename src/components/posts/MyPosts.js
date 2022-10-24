@@ -56,7 +56,7 @@ export const MyPosts = () => {
         () => {
             const sortPosts = filteredPosts.sort((a, b) => (b.publication_date - a.publication_date) ? 1 : -1)
             setDateSortedPosts(sortPosts)
-        }
+        }, []
     )
 
     return <article className="allPosts">
