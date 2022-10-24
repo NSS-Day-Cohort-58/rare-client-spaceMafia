@@ -93,6 +93,7 @@ export const PostDetails = () => {
     const defaultDisplay = () => {
         return <article className="post_details">
             <section className="postDetails">
+                <button type="button" className="submit" onClick={() => navigate("/posts")}>to Post</button>
                 <div className="details__title">Title: {post.title}</div>
                 <div className="details__author--name">Author: {post.user_id}</div>
                 <div className="details__category">Category: {post.category_id}</div>
