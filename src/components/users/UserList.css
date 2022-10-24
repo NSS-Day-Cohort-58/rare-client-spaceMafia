@@ -22,7 +22,7 @@
     padding: 20px 90px;
 }
 
-.user-label, .user-name, .user-email {
+.user-name, .user-username, .user-email {
     padding: 4px, 10px;
     margin-right: 30px;
     word-spacing: 1px;
