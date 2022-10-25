@@ -9,7 +9,7 @@ import { Authorized } from "./Authorized"
 import { MyPosts } from "../components/posts/MyPosts"
 import { CategoryContainer } from "../components/categories/CategoryContainer"
 import { UserList } from "../components/users/UserList"
-// import { TagEdit } from "../components/tags/TagEdit"
+import { TagEdit } from "../components/tags/TagEdit"
 
 export const ApplicationViews = ({ token, setToken }) => {
   return <>
@@ -19,7 +19,7 @@ export const ApplicationViews = ({ token, setToken }) => {
       <Route element={<Authorized token={token} />}>
 
         <Route path="/tags" element={<TagContainer />} />
-        {/* <Route path="/tags/:tagId" element={<TagEdit />} /> */}
+        <Route path="/tags/:tagId" element={<TagEdit />} />
         <Route path="/posts" element={<AllPosts />} />
         <Route path="/posts/:postId" element={<PostDetails />} />
         <Route path="/categories" element={<CategoryContainer />} />
