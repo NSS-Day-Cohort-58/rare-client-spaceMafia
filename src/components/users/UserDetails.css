@@ -22,8 +22,25 @@
     padding: 20px 90px;
 }
 
-.user-name, .user-username, .user-email {
+.user-name, .user-username, .user-creation, .user-bio, .user-email {
     padding: 4px, 10px;
     margin-right: 30px;
     word-spacing: 1px;
 }
+
+.user-image {
+    border-radius: 8px;
+    max-width: 500px;
+    height: auto;
+    max-height: 500px;
+}
+
+.btn-userSubscribe{
+    height: 4rem;
+    width: 8rem;
+    border-radius: 1rem;
+}
+
+/* The information for each 
+section should be listed top to bottom
+not left to right */
