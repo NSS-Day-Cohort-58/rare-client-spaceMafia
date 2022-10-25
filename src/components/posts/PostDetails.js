@@ -18,9 +18,7 @@ export const PostDetails = () => {
         publication_date: "",
         image_url: "",
         content: "",
-        approved: false,
-        user: "",
-        category: ""
+        approved: false
     })
 
     const localForumUser = localStorage.getItem("forum_user")
@@ -48,29 +46,38 @@ export const PostDetails = () => {
 
     }, [postId])
 
+    const confirmDelete = (evt, post) => {
+        let text = 'Are you sure you want to delete'
+        window.confirm(text)
+            ? deletePost(post.id).then(() => navigate("/posts"))
+            : <></>
+    }
+
+
     const defaultDisplay = () => {
         return <article className="post_details" >
             <button type="button" className="btn__navigate" onClick={() => navigate("/posts")}>Back to Post</button>
-            < section className="postDetails columns box" id="posts__postDetails" >
-                <div className="details__title column">Title: {post.title}</div>
-                <div className="details__author--name column">Author: {post.user.first_name} {post.user.last_name}</div>
-                <div className="details__category column">Category: {post.category.label}</div>
-                <div className="details__publication--date column">Publication Date: {post.publication_date}</div>
-                <div className="details__content column">Content: {post.content}</div>
+            <div className="columns box" id="posts__postDetails">
+                < section className="postDetails column">
+                    <div className="details__title has-text-left">Title: {post.title}</div>
+                    <div className="details__author--name has-text-left">Author: {post.user_id}</div>
+                    <div className="details__category has-text-left">Category: {post.category_id}</div>
+                    <div className="details__publication--date has-text-left">Publication Date: {post.publication_date}</div>
+                    <div className="details__content has-text-left">Content: {post.content}</div>
 
-                <div className="column">
+                </section >
+                <footer className="">
                     <button onClick={() => updateClickStatus(true)}>Edit Post</button>
-                </div>
 
-                <div className="column">
                     {
                         post.user_id === forumUserObject.id
-                            ? <button className="btn_delete-post" onClick={() => deletePost(post.id).then(() => navigate("/posts"))}>DELETE</button>
+                            ? <button className="btn_delete-post" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
                             : <></>
                     }
-                </div>
+                </footer>
 
-            </section >
+
+            </div>
         </article >
     }
 
@@ -78,12 +85,12 @@ export const PostDetails = () => {
         <h2>Post Details:</h2>
         {
             clickStatus
-            ? <PostEdit post={post} 
-            setPost={setPost} 
-            renderPost={renderPost} 
-            categories={categories}
-            updateClickStatus={updateClickStatus}/>
-            : defaultDisplay()
+                ? <PostEdit post={post}
+                    setPost={setPost}
+                    renderPost={renderPost}
+                    categories={categories}
+                    updateClickStatus={updateClickStatus} />
+                : defaultDisplay()
         }
     </main>
 
