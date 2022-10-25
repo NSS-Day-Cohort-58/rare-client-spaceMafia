@@ -19,7 +19,7 @@ export const createTag = (tag) => {
 }
 
 export const saveEditedTag = (tag) => {
-    return fetch(`http://localhost:8088/posts/${tag.id}`, {
+    return fetch(`http://localhost:8088/tags/${tag.id}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
