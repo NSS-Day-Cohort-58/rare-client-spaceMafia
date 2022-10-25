@@ -71,7 +71,7 @@ export const PostDetails = () => {
 
                     {
                         post.user_id === forumUserObject.id
-                            ? <button className="btn_delete-post" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
+                            ? <button className="btn_delete-post is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
                             : <></>
                     }
                 </footer>
