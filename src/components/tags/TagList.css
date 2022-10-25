@@ -30,3 +30,17 @@
 .tag__buttons {
     margin: 1rem;
 }
+
+/* styling for TagEdit (mostly) */
+.tag__update {
+    width: 50%;
+    margin: auto;
+}
+
+.input {
+    margin-bottom: 1rem;
+}
+
+.tag__text {
+    font-size: 1.2rem;
+}
