@@ -1,20 +1,25 @@
-.tags__list{
+#tags {
+    margin-bottom: 1.5rem;
+}
+
+.tags__list {
     display: flex;
     flex-direction: column;
 }
 
-.tag__header{
+.tag__header {
     text-align: center;
 }
 
-.tag{
+.tag {
     padding: 2rem;
-    margin: 0.5rem;
+    margin: 1rem;
     height: 10rem;
     display: flex;
 }
 
-.tag__button{
+
+.tag__button {
     height: 2rem;
     width: 4rem;
     padding: 0.2rem 0.5rem;
@@ -22,6 +27,20 @@
     border-radius: 1rem;
 }
 
-.tag__buttons{
+.tag__buttons {
     margin: 1rem;
+}
+
+/* styling for TagEdit (mostly) */
+.tag__update {
+    width: 50%;
+    margin: auto;
+}
+
+.input {
+    margin-bottom: 1rem;
+}
+
+.tag__text {
+    font-size: 1.2rem;
 }

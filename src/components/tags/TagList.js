@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { getTags } from "../../managers/TagManager"
 import './TagList.css'
 
 export const TagList = () => {
-    
+
     const [tags, setTags] = useState([])
-    
+    const navigate = useNavigate()
+
     useEffect(
         () => {
             getTags()
-            .then(data => setTags(data))
+                .then(data => setTags(data))
         },
         []
     )
@@ -18,14 +20,14 @@ export const TagList = () => {
         <h2 className="tag__header title">Tags</h2>
         {
             tags.map(tag => {
-                return <div key={`tag--${tag.id}`} className="tag">
-                    <h3 className="subtitle is-5 is-marginless">{tag.label}</h3>
-                    <div className="tag__buttons">
-                        <button className="tag__button button is-small is-success">Edit</button>
-                        <button className="tag__button button is-small is-danger">Delete</button>
+                return <div key={`tag--${tag.id}`} className="tag columns" id="tags">
+                    <div className="column"><h3 className="subtitle is-5 is-marginless">{tag.label}</h3></div>
+                    <div className="tag__buttons column">
+                        <button className="tag__button button is-small is-responsive is-success " onClick={() => navigate(`/tags/${tag.id}`)}>Edit</button>
+                        <button className="tag__button button is-small is-responsive is-danger">Delete</button>
                     </div>
                 </div>
-            })   
+            })
         }
     </section>
 }
