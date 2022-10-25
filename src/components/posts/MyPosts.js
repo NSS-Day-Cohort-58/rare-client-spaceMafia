@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
-import { getPosts } from "../../managers/PostsManger"
+import { deletePost, getPosts } from "../../managers/PostsManger"
 import { getUsers } from "../../managers/UserManager"
+import "./Posts.css"
 
 export const MyPosts = () => {
 
@@ -12,6 +13,8 @@ export const MyPosts = () => {
     const [categoryId, setCategoryId] = useState(0)
     const [allUsers, setUsers] = useState([])
     const [dateSortedPosts, setDateSortedPosts] = useState([])
+
+    const navigate = useNavigate()
 
     const localForumUser = localStorage.getItem("forum_user")
     const forumUserObject = JSON.parse(localForumUser)
@@ -54,10 +57,19 @@ export const MyPosts = () => {
 
     useEffect(
         () => {
-            const sortPosts = filteredPosts.sort((a, b) => (b.publication_date - a.publication_date) ? 1 : -1)
+            const sortPosts = filteredPosts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
             setDateSortedPosts(sortPosts)
-        }
+        }, [filteredPosts]
     )
+
+    //  handles confirmation of deletion via a popup
+    const confirmDelete = (evt, dateSortedPost) => {
+        let text = 'Are you sure you want to delete'
+        // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
+        window.confirm(text)
+            ? deletePost(dateSortedPost.id).then(() => navigate("/posts"))
+            : <></>
+    }
 
     return <article className="allPosts">
         <h2 className="postsHeader">{forumUserObject.username}'s Posts: </h2>
@@ -86,33 +98,32 @@ export const MyPosts = () => {
                 (dateSortedPost) => {
                     if (dateSortedPost.category_id === categoryId || categoryId === 0)
                         return <>
-                        <section className="postDetails" key={`task--${dateSortedPost.id}`}>
-                            <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
-                            {
-                                allUsers.map((user) => {
-                                    if (user.id === dateSortedPost.user_id)
-                                        return <div className="authorDiv">Author: {user.username}</div>
-                                })
-                            }
-                            {
-                                categories.map((category) => {
-                                    if (category.id === dateSortedPost.category_id)
-                                        return <div className="categoryDiv">Category: {category.label}</div>
-                                })
-                            }
-                            <div className="contentDiv">Content: {dateSortedPost.content}</div>
-                            <footer className="postFooter">Date: {dateSortedPost.publication_date}</footer>
-                        </section>
-                        <footer className="cardButtons">
-                            <button >
-                                Edit Post
-                            </button>
-                            <button
-                                >
-                                Delete Post
-                            </button>
-                        </footer>
-                </> 
+                            <div className=" columns box" id="post__myPost">
+                                <section className="postDetails column" key={`post--${dateSortedPost.id}`}>
+                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`}>Title: {dateSortedPost.title}</Link></div>
+                                    {
+                                        allUsers.map((user) => {
+                                            if (user.id === dateSortedPost.user_id)
+                                                return <div className="authorDiv has-text-left" key={`category--${user.id}`}>Author: {user.username}</div>
+                                        })
+                                    }
+                                    {
+                                        categories.map((category) => {
+                                            if (category.id === dateSortedPost.category_id)
+                                                return <div className="categoryDiv has-text-left" key={`category--${category.id}`}>Category: {category.label}</div>
+                                        })
+                                    }
+                                    <div className="contentDiv has-text-left" >Content: {dateSortedPost.content}</div>
+                                    <footer className="postFooter has-text-left" >Date: {dateSortedPost.publication_date}</footer>
+                                </section>
+                                <footer className="cardButtons">
+                                    <button>
+                                        Edit Post
+                                    </button>
+                                    <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>Delete Post </button>
+                                </footer>
+                            </div>
+                        </>
                 }
             )
         }

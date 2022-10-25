@@ -27,7 +27,13 @@ export const AddPost = () => {
     const month = newDate.getUTCMonth() +1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
-    const today = year + "-" + month + "-" + date
+    const formatDate = date.toLocaleString('en-us', {
+        minimumIntegerDigits: 2
+    })
+    const formatMonth = month.toLocaleString('en-us', {
+        minimumIntegerDigits: 2
+    })
+    const today = year + "-" + formatMonth + "-" + formatDate
 
     const navigate = useNavigate()
     const localForumUser = localStorage.getItem("forum_user")
