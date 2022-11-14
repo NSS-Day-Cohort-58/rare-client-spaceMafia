@@ -9,3 +9,8 @@
 
 
 <!-- TODO: Finish writing the readme -->
+
+
+ERD
+
+![image](https://user-images.githubusercontent.com/55569936/201730416-4c310443-9f5d-4f6c-853d-921ef806e2aa.png)
