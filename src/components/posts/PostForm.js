@@ -24,7 +24,7 @@ export const AddPost = () => {
     const [categoryId, setCategoryId] = useState(0)
 
     const newDate = new Date()
-    const month = newDate.getUTCMonth() +1
+    const month = newDate.getUTCMonth() + 1
     const date = newDate.getUTCDate()
     const year = newDate.getUTCFullYear()
     const formatDate = date.toLocaleString('en-us', {
@@ -81,30 +81,30 @@ export const AddPost = () => {
             tag_id: postTag.tag_id
         }
 
-        fetch('http://localhost:8088/posts', {
+        fetch('http://localhost:8000/posts', {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
             },
             body: JSON.stringify(newPostToSendToAPI)
         })
-        .then(response => response.json())
-        .then(parsedResponse => {
-            postTagsToSendToAPI.post_id = parsedResponse.id
-            return fetch(`http://localhost:8088/postTags`, {
-                method: "POST",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify(postTagsToSendToAPI)
-            })
-                .then(response => response.json())
-                .then (() => {
-                    getNewPost()
+            .then(response => response.json())
+            .then(parsedResponse => {
+                postTagsToSendToAPI.post_id = parsedResponse.id
+                return fetch(`http://localhost:8000/postTags`, {
+                    method: "POST",
+                    headers: {
+                        "Content-type": "application/json"
+                    },
+                    body: JSON.stringify(postTagsToSendToAPI)
                 })
-        })
+                    .then(response => response.json())
+                    .then(() => {
+                        getNewPost()
+                    })
+            })
     }
-    
+
     return <form className="newPostForm">
         <h2 className="newPostFormTitle">New Post</h2>
         <fieldset className="formData">
@@ -115,7 +115,7 @@ export const AddPost = () => {
                 placeholder="Title"
                 value={newPost.title}
                 onChange={(evt) => {
-                    const copy = { ...newPost}
+                    const copy = { ...newPost }
                     copy.title = evt.target.value
                     updateNewPost(copy)
                 }}
@@ -129,7 +129,7 @@ export const AddPost = () => {
                 placeholder="Image URL"
                 value={newPost.image_url}
                 onChange={(evt) => {
-                    const copy = { ...newPost}
+                    const copy = { ...newPost }
                     copy.image_url = evt.target.value
                     updateNewPost(copy)
                 }}
@@ -143,7 +143,7 @@ export const AddPost = () => {
                 placeholder="Enter your message."
                 value={newPost.content}
                 onChange={(evt) => {
-                    const copy = { ...newPost}
+                    const copy = { ...newPost }
                     copy.content = evt.target.value
                     updateNewPost(copy)
                 }}
@@ -153,7 +153,7 @@ export const AddPost = () => {
             <div className="formCatDropDown">
                 <label htmlFor="addCategories" className="bookCategoriesLabel">Category:</label>
                 <select className="editDropDown"
-                
+
                     onChange={(evt) => {
                         setCategoryId(parseInt(evt.target.value))
                     }}
@@ -176,28 +176,28 @@ export const AddPost = () => {
                 {
                     tags.map((tag) => {
                         return <>
-                        <label htmlFor="addTags" className="dustTagsLabel">{tag.label}: </label>
+                            <label htmlFor="addTags" className="dustTagsLabel">{tag.label}: </label>
                             <input
                                 type="checkbox"
                                 className="addTags"
                                 value={false}
                                 onChange={(evt) => {
                                     if (evt.target.checked === true) {
-                                    const copy = { ...postTag }
-                                    copy.tag_id = tag.id
-                                    updatePostTag(copy)
+                                        const copy = { ...postTag }
+                                        copy.tag_id = tag.id
+                                        updatePostTag(copy)
                                     }
                                 }}
                             />
                         </>
                     })
-                }  
+                }
             </div>
         </fieldset>
-        <button 
-                onClick={(clickEvent) => handleButtonClick(clickEvent)}
-                className="btn btn-primary">
-                Publish
-            </button>
+        <button
+            onClick={(clickEvent) => handleButtonClick(clickEvent)}
+            className="btn btn-primary">
+            Publish
+        </button>
     </form>
 }
