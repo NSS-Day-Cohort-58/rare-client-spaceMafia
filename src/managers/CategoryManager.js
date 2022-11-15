@@ -13,7 +13,9 @@ export const createCategory = (category) => {
     return fetch("http://localhost:8000/categories", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            //"Authorization": `Token ${localStorage.getItem("lu_token")}`
         },
         body: JSON.stringify(category)
     })
