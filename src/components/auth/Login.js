@@ -19,7 +19,7 @@ export const Login = ({ setToken }) => {
     loginUser(user).then(res => {
       if ("valid" in res && res.valid) {
         setToken(res.token)
-        fetch(`http://localhost:8088/users`)
+        fetch(`http://localhost:8000/users`)
         .then(res => res.json())
         .then(foundUsers => {
           const allUsers = foundUsers

@@ -1,11 +1,5 @@
 export const getCategories = () => {
-    return fetch(`http://localhost:8000/categories`, {
-        headers:{
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-            //"Authorization": `Token ${localStorage.getItem("lu_token")}`
-        }
-    })
+    return fetch(`http://localhost:8088/categories`)
         .then(res => res.json())
 }
 
