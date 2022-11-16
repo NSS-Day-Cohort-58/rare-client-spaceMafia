@@ -10,6 +10,7 @@ export const Register = ({setToken}) => {
   const username = useRef()
   const bio = useRef()
   const password = useRef()
+  const profileImage = useRef()
   const verifyPassword = useRef()
   const passwordDialog = useRef()
   const navigate = useNavigate()
@@ -24,12 +25,13 @@ export const Register = ({setToken}) => {
         last_name: lastName.current.value,
         email: email.current.value,
         password: password.current.value,
-        bio: bio.current.value
+        bio: bio.current.value,
+        profile_image:profileImage.current.value
       }
 
       registerUser(newUser)
         .then(res => {
-          if ("valid" in res && res.valid) {
+          if ("token" in res && res.token) {
             setToken(res.token)
             navigate("/")
           }
@@ -96,9 +98,17 @@ export const Register = ({setToken}) => {
           </div>
         </div>
 
+        <div className="field">
+          <label className="label">Profile Image</label>
+          <div className="control">
+            <textarea className="textarea" placeholder="Insert Picture URL" ref={profileImage}></textarea>
+          </div>
+        </div>
+
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-link" type="submit">Submit</button>
+            <button className="button is-link" type="submit" >
+              Submit</button>
           </div>
           <div className="control">
             <Link to="/login" className="button is-link is-light">Cancel</Link>

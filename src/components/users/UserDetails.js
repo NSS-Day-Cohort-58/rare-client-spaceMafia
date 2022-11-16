@@ -10,7 +10,7 @@ export const UserDetails = () => {
 
 useEffect(
     () => {
-    fetch(`http://localhost:8088/users/${userId}`)
+    fetch(`http://localhost:8000/users/${userId}`)
     .then(res => res.json())
     .then((userArray) => {
         setUsers(userArray)

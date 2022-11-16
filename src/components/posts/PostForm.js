@@ -81,7 +81,7 @@ export const AddPost = () => {
             tag_id: postTag.tag_id
         }
 
-        fetch('http://localhost:8088/posts', {
+        fetch('http://localhost:8000/posts', {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -91,7 +91,7 @@ export const AddPost = () => {
         .then(response => response.json())
         .then(parsedResponse => {
             postTagsToSendToAPI.post_id = parsedResponse.id
-            return fetch(`http://localhost:8088/postTags`, {
+            return fetch(`http://localhost:8000/postTags`, {
                 method: "POST",
                 headers: {
                     "Content-type": "application/json"
