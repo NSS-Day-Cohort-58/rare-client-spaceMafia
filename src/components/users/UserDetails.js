@@ -16,16 +16,16 @@ export const UserDetails = () => {
         [userId]
     )
 
-    // useEffect(
-    //     () => {
-    //     fetch(`http://localhost:8000/users/${userId}`)
-    //     .then(res => res.json())
-    //     .then((userArray) => {
-    //         setUsers(userArray)
-    //     })
-    // },
-    // [userId]
-    // )
+    useEffect(
+        () => {
+            fetch(`http://localhost:8000/users/${userId}`)
+                .then(res => res.json())
+                .then((userArray) => {
+                    setUsers(userArray)
+                })
+        },
+        [userId]
+    )
 
     return <section className="user-details"> <div className="user-details_title">Rare User Details</div>
         <button className="btn-all-users"

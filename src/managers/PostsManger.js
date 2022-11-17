@@ -11,7 +11,7 @@ export const getPosts = () => {
 export const getPostById = (id) => {
     return fetch(`http://localhost:8000/posts/${id}`, {
         headers: {
-            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
         .then(response => response.json())
@@ -29,7 +29,7 @@ export const saveEditedPost = (post) => {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
         },
         body: JSON.stringify(post)
     })
