@@ -46,12 +46,12 @@ export const AllPosts = () => {
         }, []
     )
 
-    useEffect(
-        () => {
-            const sortPosts = allPosts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
-            setDateSortedPosts(sortPosts)
-        }, [allPosts]
-    )
+    // useEffect(
+    //     () => {
+    //         const sortPosts = allPosts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
+    //         setDateSortedPosts(sortPosts)
+    //     }, [allPosts]
+    // )
     //  handles confirmation of deletion via a popup
     const confirmDelete = (evt, dateSortedPost) => {
         // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 

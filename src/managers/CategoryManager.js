@@ -3,7 +3,7 @@ export const getCategories = () => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            //"Authorization": `Token ${localStorage.getItem("lu_token")}`
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
         .then(res => res.json())
@@ -15,7 +15,7 @@ export const createCategory = (category) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            //"Authorization": `Token ${localStorage.getItem("lu_token")}`
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
         },
         body: JSON.stringify(category)
     })

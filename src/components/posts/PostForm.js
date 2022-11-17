@@ -102,6 +102,10 @@ export const AddPost = () => {
                     .then(() => {
                         getNewPost()
                     })
+                    .then(response => response.json())
+                    .then(() => {
+                        getNewPost()
+                    })
             })
     }
 
