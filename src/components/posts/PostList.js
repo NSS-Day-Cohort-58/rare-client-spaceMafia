@@ -7,7 +7,7 @@ import "./Posts.css"
 
 export const AllPosts = () => {
 
-    const [allPosts, setAllPosts] = useState([])
+    const [posts, setPosts] = useState([])
     const [dateSortedPosts, setDateSortedPosts] = useState([])
     const [categories, setCategories] = useState([])
     const [categoryId, setCategoryId] = useState(0)
@@ -21,12 +21,13 @@ export const AllPosts = () => {
     useEffect(
         () => {
             getPosts()
-                .then((allPostsArray) => {
-                    setAllPosts(allPostsArray)
+                .then((postsArray) => {
+                    setPosts(postsArray)
                 })
         },
         []
     )
+    console.log(posts)
 
     useEffect(
         () => {
@@ -48,9 +49,9 @@ export const AllPosts = () => {
 
     useEffect(
         () => {
-            const sortPosts = allPosts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
+            const sortPosts = posts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
             setDateSortedPosts(sortPosts)
-        }, [allPosts]
+        }, [posts]
     )
 
 
@@ -63,7 +64,7 @@ export const AllPosts = () => {
             : <></>
     }
 
-    return <article className="allPosts">
+    return <article className="posts">
         <h2 className="postsHeader">Posts: </h2>
 
         <fieldset>
@@ -89,30 +90,18 @@ export const AllPosts = () => {
         {
             dateSortedPosts.map(
                 (dateSortedPost) => {
-                    if (dateSortedPost.category_id === categoryId || categoryId === 0)
+                    if (dateSortedPost.category.id === categoryId || categoryId === 0)
                         return <>
                             <div className="columns box" id="posts__postDetails">
                                 <section className="postDetails column" key={`post-${dateSortedPost.id}`}>
                                     <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
-                                    {
-                                        allUsers.map((user) => {
-                                            if (user.id === dateSortedPost.user_id)
-                                                return <div className="authorDiv has-text-left" key={`post--${user.id}`}>Author: {user.username}</div>
-                                        })
-                                    }
-                                    {
-                                        categories.map((category) => {
-                                            if (category.id === dateSortedPost.category_id)
-                                                return <div className="categoryDiv has-text-left" key={`post-${category.id}`} >Category: {category.label}</div>
-                                        })
-                                    }
-                                    <div className="contentDiv has-text-left">Content: {dateSortedPost.content}</div>
-                                    <footer className="postFooter has-text-left ">Date: {dateSortedPost.publication_date}</footer>
+                                    <div className="authorDiv has-text-left" key={`post--${allUsers.id}`}>Author: {dateSortedPost.author.full_name}</div>
+                                    <div className="categoryDiv has-text-left" key={`post-${dateSortedPost.id}`} >Category: {dateSortedPost.category.label}</div>
                                 </section>
                                 <footer className="">
                                     {
-                                        dateSortedPost.user_id === forumUserObject.id
-                                            ? <button className="btn_delete-post " onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
+                                        dateSortedPost.author.id === forumUserObject.id
+                                            ? <button className="btn_delete-post button is-danger is-small" onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
                                             : <></>
 
                                     }
