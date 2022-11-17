@@ -22,7 +22,7 @@ export const CategoryList = () => {
         // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
         let text = 'Are you sure you want to delete this category?'
         window.confirm(text)
-            ? deleteCategory(category.id).then(() => navigate("/categories"))
+            ? deleteCategory(category.id).then(() => {window.location.reload()})
             : <></>
     }
 
@@ -30,7 +30,8 @@ export const CategoryList = () => {
         {categories.map(category => {
             return <div key={`category--${category.id}`} className="category">
                 <h3 className="category_label">{category.label}</h3>
-        <button className="category__button button is-small is-responsive is-danger" onClick={(evt) => categoryDelete(evt, category).then(() => {window.location.reload()})}>Delete</button>     
+        <button className="category__button button is-small is-responsive is-danger" 
+        onClick={(evt) => categoryDelete(evt, category)}>Delete</button>     
                 <div>
                 </div>
             </div>
