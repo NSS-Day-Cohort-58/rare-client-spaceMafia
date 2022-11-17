@@ -8,16 +8,24 @@ export const UserDetails = () => {
     const [user, setUsers] = useState([])
     const navigate = useNavigate()
 
-useEffect(
-    () => {
-    fetch(`http://localhost:8000/users/${userId}`)
-    .then(res => res.json())
-    .then((userArray) => {
-        setUsers(userArray)
-    })
-},
-[userId]
-)
+    useEffect (
+        () => {
+            getUserById(userId)
+            .then(data => setUsers(data))
+        },
+        [userId]
+    )
+
+// useEffect(
+//     () => {
+//     fetch(`http://localhost:8000/users/${userId}`)
+//     .then(res => res.json())
+//     .then((userArray) => {
+//         setUsers(userArray)
+//     })
+// },
+// [userId]
+// )
 
     
     return <section className="user-details"> <div className="user-details_title">Rare User Details</div>
@@ -26,11 +34,12 @@ useEffect(
          >All Users</button>
 
     <section key={`user--${user.id}`} className="user" to={`/users/${user.id}`}>
+    <div className="user-name">Name: {user.author?.full_name} </div>
     <div className="user-username">Username: {user.username}</div>
-    <div className="user-name">Name: {user.first_name} {user.last_name} </div>
-    <img className="user-image" src={user.profile_image_url}/>
-    <div className="user-creation">Profile Creation Date: {user.created_on}</div>
-    <div className="user-bio">Bio: {user.bio}</div>
+    <img className="user-image" src={user.author?.profile_image}/>
+    <div className="user-creation">Profile Creation Date: {user.date_joined}</div>
+    <div className="user-email">Email: {user.email}</div>
+    <div className="user-bio">Bio: {user.author?.bio}</div>
     <button className="btn-userSubscribe">Subscribe</button>
     <button className="btn-userSubscribe">Unsubscribe</button>
     </section>
