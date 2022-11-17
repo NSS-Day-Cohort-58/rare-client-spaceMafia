@@ -20,3 +20,14 @@ export const createCategory = (category) => {
         body: JSON.stringify(category)
     })
 }
+
+export const deleteCategory = (id) => {
+     return fetch(`http://localhost:8000/categories/${id}`, {
+         method: "DELETE",
+         headers:{
+             "Accept": "application/json",
+             "Content-Type": "application/json",
+             //"Authorization": `Token ${localStorage.getItem("lu_token")}`
+         }
+     })
+ }
