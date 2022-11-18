@@ -10,7 +10,7 @@ export const AddPost = () => {
     const forumUserObject = JSON.parse(localForumUser)
 
     const [newPost, updateNewPost] = useState({
-        author_id: forumUserObject.id,
+        author_id: 1,
         category_id: 0,
         title: "",
         publication_date: "",
@@ -70,7 +70,7 @@ export const AddPost = () => {
         evt.preventDefault()
 
         const newPostToSendToAPI = {
-            author_id: forumUserObject.id,
+            author_id: evt.author.id,
             category_id: categoryId,
             title: newPost.title,
             publication_date: today,

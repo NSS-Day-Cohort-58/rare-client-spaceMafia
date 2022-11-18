@@ -73,7 +73,7 @@ export const PostDetails = () => {
                     <button className="button is-small is-warning" onClick={() => updateClickStatus(true)}>Edit Post</button>
 
                     {
-                        post.user_id === forumUserObject.id
+                        post.is_author
                             ? <button className="btn_delete-post is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
                             : <></>
                     }

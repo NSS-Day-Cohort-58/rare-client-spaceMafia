@@ -10,8 +10,7 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
             .then(() => renderPost())
     }
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
+
 
     const handleCancel = (event) => {
         event.preventDefault()
@@ -23,7 +22,7 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
     return <>
         <article className="post__edit-a box p-5">
             <form className="post__edit-b Form box p-5">
-                <div className="mb-5"><span className="is-bold mr-3">Author:  </span><span className="title is-3">{forumUserObject.username}</span></div>
+                <div className="mb-5"><span className="is-bold mr-3">Author:  </span><span className="title is-3">{post.author.full_name}</span></div>
                 <div className="mb-3">
                     <label htmlFor="title">Title: </label>
                     <input
@@ -64,7 +63,7 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
                     </div>
                     <div className="column ml-5">
                         <div>
-                            <button className="button is-success is-large">Approved</button>
+                            <button className="button is-success is-large is-fullwidth">Approved</button>
                         </div>
                     </div>
                 </div>
