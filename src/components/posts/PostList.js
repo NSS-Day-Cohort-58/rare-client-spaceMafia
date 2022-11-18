@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
 import { deletePost, getPosts } from "../../managers/PostsManger"
@@ -27,7 +27,6 @@ export const AllPosts = () => {
         },
         []
     )
-    console.log(posts)
 
     useEffect(
         () => {
@@ -91,10 +90,10 @@ export const AllPosts = () => {
             dateSortedPosts.map(
                 (dateSortedPost) => {
                     if (dateSortedPost.category.id === categoryId || categoryId === 0)
-                        return <>
+                        return <React.Fragment key={`posts--${dateSortedPost.id}`}>
                             <div className="columns box" id="posts__postDetails">
-                                <section className="postDetails column" key={`post-${dateSortedPost.id}`}>
-                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
+                                <section className="postDetails column">
+                                    <div className="titleDiv">Title: <Link className="" to={`/posts/${dateSortedPost.id}`} >{dateSortedPost.title}</Link></div>
                                     <div className="authorDiv has-text-left" key={`post--${allUsers.id}`}>Author: {dateSortedPost.author.full_name}</div>
                                     <div className="categoryDiv has-text-left" key={`post-${dateSortedPost.id}`} >Category: {dateSortedPost.category.label}</div>
                                 </section>
@@ -108,7 +107,7 @@ export const AllPosts = () => {
                                 </footer>
                             </div>
 
-                        </>
+                        </React.Fragment>
                 }
 
             )

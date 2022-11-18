@@ -19,7 +19,7 @@ export const PostDetails = () => {
         publication_date: "",
         image_url: "",
         content: "",
-        approved: false
+        approved: true
     })
 
     const localForumUser = localStorage.getItem("forum_user")
@@ -57,7 +57,7 @@ export const PostDetails = () => {
 
     const defaultDisplay = () => {
         return <article className="post_details" >
-            <button type="button" className="btn__navigate is-success" onClick={() => navigate("/posts")}>Back to Post</button>
+            <button type="button" className="btn__navigate button is-small is-dark ml-2" onClick={() => navigate("/posts")}>Back to Post</button>
             <div className="columns box" id="posts__postDetails">
                 < section className="postDetails column">
                     <div className="details__title has-text-left is-size-5 mb-3">Title: {post.title}</div>
@@ -85,14 +85,15 @@ export const PostDetails = () => {
     }
 
     return <main>
-        <h2>Post Details:</h2>
+        <h2 className="ml-5 mt-5">Post Details:</h2>
         {
             clickStatus
                 ? <PostEdit post={post}
                     setPost={setPost}
                     renderPost={renderPost}
                     categories={categories}
-                    updateClickStatus={updateClickStatus} />
+                    updateClickStatus={updateClickStatus}
+                />
                 : defaultDisplay()
         }
     </main>

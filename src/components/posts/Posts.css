@@ -5,12 +5,25 @@
     width: 40%;
 }
 
+.post__edit-a {
+    width: 50%;
+    margin: auto;
+}
+
+.post_edit-b {
+    width: 50%;
+}
+
 .editDropDown {
     margin-bottom: 1rem;
 }
 
 .btn__navigate {
     margin-bottom: 1rem;
+}
+
+.btn-accountSave {
+    margin: auto;
 }
 
 article {
