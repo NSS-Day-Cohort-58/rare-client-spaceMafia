@@ -14,8 +14,8 @@ export const AllPosts = () => {
     const [allUsers, setUsers] = useState([])
     const navigate = useNavigate()
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
+    // const localForumUser = localStorage.getItem("forum_user")
+    // const forumUserObject = JSON.parse(localForumUser)
 
 
     useEffect(
@@ -64,12 +64,12 @@ export const AllPosts = () => {
     }
 
     return <article className="posts">
-        <h2 className="postsHeader">Posts: </h2>
+        <h2 className="postsHeader title is-3">Post List </h2>
 
         <fieldset>
             <div className="dropDown">
-                <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
-                <select className="editDropDown"
+                <label htmlFor="filterCategory" className="dropDownCategories mr-3">Choose Your Category:</label>
+                <select className="editDropDown select"
                     onChange={(evt) => {
                         setCategoryId(parseInt(evt.target.value))
                     }}
@@ -99,7 +99,7 @@ export const AllPosts = () => {
                                 </section>
                                 <footer className="">
                                     {
-                                        dateSortedPost.author.id === forumUserObject.id
+                                        dateSortedPost.is_author
                                             ? <button className="btn_delete-post button is-danger is-small" onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
                                             : <></>
 

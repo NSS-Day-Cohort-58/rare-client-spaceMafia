@@ -18,19 +18,8 @@ export const Login = ({ setToken }) => {
 
     loginUser(user).then(res => {
       if ("valid" in res && res.valid) {
+        // if ("token" in res && res.token) {
         setToken(res.token)
-        fetch(`http://localhost:8000/users`)
-          .then(res => res.json())
-          .then(foundUsers => {
-            const allUsers = foundUsers
-            allUsers.map((loggedInUser) => {
-              if (loggedInUser.username === user.username)
-                return localStorage.setItem("forum_user", JSON.stringify({
-                  id: loggedInUser.id,
-                  username: loggedInUser.username
-                }))
-            })
-          })
         navigate("/")
       }
       else {
