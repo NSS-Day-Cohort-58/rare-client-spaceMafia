@@ -21,7 +21,11 @@ export const getPostById = (id) => {
 export const deletePost = (postId) => {
     return fetch(`http://localhost:8000/posts/${postId}`, {
         method: "DELETE",
-        "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
     })
 }
 

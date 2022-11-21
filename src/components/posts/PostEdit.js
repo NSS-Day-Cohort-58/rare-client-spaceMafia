@@ -10,8 +10,6 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
             .then(() => renderPost())
     }
 
-
-
     const handleCancel = (event) => {
         event.preventDefault()
 

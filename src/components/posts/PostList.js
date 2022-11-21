@@ -59,7 +59,9 @@ export const AllPosts = () => {
         // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
         let text = 'Are you sure you want to delete'
         window.confirm(text)
-            ? deletePost(dateSortedPost.id).then(() => navigate("/posts"))
+            ? deletePost(dateSortedPost.id)
+                .then(() => getPosts()
+                    .then(data => setPosts(data)))
             : <></>
     }
 

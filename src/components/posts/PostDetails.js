@@ -70,11 +70,16 @@ export const PostDetails = () => {
 
                 </section >
                 <footer className="">
-                    <button className="button is-small is-warning" onClick={() => updateClickStatus(true)}>Edit Post</button>
-
                     {
                         post.is_author
-                            ? <button className="btn_delete-post is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
+                            ? <>
+                                <div>
+                                    <button className="btn_delete-post button is-small mb-2 is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
+                                </div>
+                                <div>
+                                    <button className="button is-small is-warning" onClick={() => updateClickStatus(true)}>Edit Post</button>
+                                </div>
+                            </>
                             : <></>
                     }
                 </footer>

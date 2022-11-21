@@ -31,8 +31,18 @@ export const MyPosts = () => {
 
     useEffect(
         () => {
-            const myPosts = allPosts.filter(allPost => allPost.user_id === forumUserObject.id)
+            const myPosts = allPosts.filter(allPost => allPost.is_author === true)
             setFilteredPosts(myPosts)
+        },
+        [allPosts]
+    )
+
+    useEffect(
+        () => {
+            if (allPosts.is_author) {
+                const myUser = allUsers.filter(user => allPosts.author.id === user.id)
+                setUsers(myUser)
+            }
         },
         [allPosts]
     )
@@ -72,7 +82,7 @@ export const MyPosts = () => {
     }
 
     return <article className="allPosts">
-        <h2 className="postsHeader">{forumUserObject.username}'s Posts: </h2>
+        <h2 className="postsHeader">{allUsers.full_name}'s Posts: </h2>
         <fieldset>
             <div className="dropDown">
                 <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
