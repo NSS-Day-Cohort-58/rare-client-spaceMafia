@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
 import { deletePost, getPosts } from "../../managers/PostsManger"
@@ -7,22 +7,22 @@ import "./Posts.css"
 
 export const AllPosts = () => {
 
-    const [allPosts, setAllPosts] = useState([])
+    const [posts, setPosts] = useState([])
     const [dateSortedPosts, setDateSortedPosts] = useState([])
     const [categories, setCategories] = useState([])
     const [categoryId, setCategoryId] = useState(0)
     const [allUsers, setUsers] = useState([])
     const navigate = useNavigate()
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
+    // const localForumUser = localStorage.getItem("forum_user")
+    // const forumUserObject = JSON.parse(localForumUser)
 
 
     useEffect(
         () => {
             getPosts()
-                .then((allPostsArray) => {
-                    setAllPosts(allPostsArray)
+                .then((postsArray) => {
+                    setPosts(postsArray)
                 })
         },
         []
@@ -48,10 +48,12 @@ export const AllPosts = () => {
 
     useEffect(
         () => {
-            const sortPosts = allPosts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
+            const sortPosts = posts.sort((a, b) => (a.publication_date - b.publication_date) ? -1 : 1)
             setDateSortedPosts(sortPosts)
-        }, [allPosts]
+        }, [posts]
     )
+
+
     //  handles confirmation of deletion via a popup
     const confirmDelete = (evt, dateSortedPost) => {
         // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
@@ -61,13 +63,13 @@ export const AllPosts = () => {
             : <></>
     }
 
-    return <article className="allPosts">
-        <h2 className="postsHeader">Posts: </h2>
+    return <article className="posts">
+        <h2 className="postsHeader title is-3">Post List </h2>
 
         <fieldset>
             <div className="dropDown">
-                <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
-                <select className="editDropDown"
+                <label htmlFor="filterCategory" className="dropDownCategories mr-3">Choose Your Category:</label>
+                <select className="editDropDown select"
                     onChange={(evt) => {
                         setCategoryId(parseInt(evt.target.value))
                     }}
@@ -87,37 +89,25 @@ export const AllPosts = () => {
         {
             dateSortedPosts.map(
                 (dateSortedPost) => {
-                    if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <>
+                    if (dateSortedPost.category.id === categoryId || categoryId === 0)
+                        return <React.Fragment key={`posts--${dateSortedPost.id}`}>
                             <div className="columns box" id="posts__postDetails">
-                                <section className="postDetails column" key={`post-${dateSortedPost.id}`}>
-                                    <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`} >Title: {dateSortedPost.title}</Link></div>
-                                    {
-                                        allUsers.map((user) => {
-                                            if (user.id === dateSortedPost.user_id)
-                                                return <div className="authorDiv has-text-left" key={`post--${user.id}`}>Author: {user.username}</div>
-                                        })
-                                    }
-                                    {
-                                        categories.map((category) => {
-                                            if (category.id === dateSortedPost.category_id)
-                                                return <div className="categoryDiv has-text-left" key={`post-${category.id}`} >Category: {category.label}</div>
-                                        })
-                                    }
-                                    <div className="contentDiv has-text-left">Content: {dateSortedPost.content}</div>
-                                    <footer className="postFooter has-text-left ">Date: {dateSortedPost.publication_date}</footer>
+                                <section className="postDetails column">
+                                    <div className="titleDiv">Title: <Link className="" to={`/posts/${dateSortedPost.id}`} >{dateSortedPost.title}</Link></div>
+                                    <div className="authorDiv has-text-left" key={`post--${allUsers.id}`}>Author: {dateSortedPost.author.full_name}</div>
+                                    <div className="categoryDiv has-text-left" key={`post-${dateSortedPost.id}`} >Category: {dateSortedPost.category.label}</div>
                                 </section>
                                 <footer className="">
                                     {
-                                        dateSortedPost.user_id === forumUserObject.id
-                                            ? <button className="btn_delete-post " onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
+                                        dateSortedPost.is_author
+                                            ? <button className="btn_delete-post button is-danger is-small" onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
                                             : <></>
 
                                     }
                                 </footer>
                             </div>
 
-                        </>
+                        </React.Fragment>
                 }
 
             )

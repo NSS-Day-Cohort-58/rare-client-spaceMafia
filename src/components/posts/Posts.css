@@ -2,8 +2,19 @@
 #post__myPost {
     margin: auto;
     margin-bottom: 1rem;
-    width: 70%;
+    width: 40%;
 }
+
+/* form Box settings */
+.post__edit-a {
+    width: 50%;
+    margin: auto;
+}
+
+.post_edit-b {
+    width: 50%;
+}
+
 
 .editDropDown {
     margin-bottom: 1rem;
@@ -11,6 +22,10 @@
 
 .btn__navigate {
     margin-bottom: 1rem;
+}
+
+.btn-accountSave {
+    margin: auto;
 }
 
 article {
