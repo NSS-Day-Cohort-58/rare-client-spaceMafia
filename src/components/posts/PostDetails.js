@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import React, { useEffect, useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
+import { deletePost, getPostById, getPosts } from "../../managers/PostsManger"
+import { getUsers } from "../../managers/UserManager"
 import { PostEdit } from "./PostEdit"
-import { getPostById, saveEditedPost, deletePost } from "../../managers/PostsManger"
 import "./Posts.css"
 
 export const PostDetails = () => {
@@ -73,7 +74,7 @@ export const PostDetails = () => {
                     <button className="button is-small is-warning" onClick={() => updateClickStatus(true)}>Edit Post</button>
 
                     {
-                        post.is_author
+                        post.is_auth
                             ? <button className="btn_delete-post is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
                             : <></>
                     }
