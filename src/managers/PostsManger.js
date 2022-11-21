@@ -1,6 +1,8 @@
 export const getPosts = () => {
     return fetch('http://localhost:8000/posts', {
         headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
@@ -11,6 +13,8 @@ export const getPosts = () => {
 export const getPostById = (id) => {
     return fetch(`http://localhost:8000/posts/${id}`, {
         headers: {
+             "Accept": "application/json",
+            "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         }
     })
@@ -21,7 +25,9 @@ export const getPostById = (id) => {
 export const deletePost = (postId) => {
     return fetch(`http://localhost:8000/posts/${postId}`, {
         method: "DELETE",
-        "Authorization": `Token ${localStorage.getItem("auth_token")}`
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
     })
 }
 
@@ -29,6 +35,7 @@ export const saveEditedPost = (post) => {
     return fetch(`http://localhost:8000/posts/${post.id}`, {
         method: "PUT",
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json",
             "Authorization": `Token ${localStorage.getItem("auth_token")}`
         },

@@ -8,9 +8,6 @@ export const CategoryList = () => {
     const [categories, setCategories] = useState([])
     const navigate = useNavigate()
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
-
     useEffect (
         () => {
             getCategories()
@@ -25,7 +22,7 @@ export const CategoryList = () => {
             ? deleteCategory(category.id).then(() => {window.location.reload()})
             : <></>
     }
-//Check if we need this here or on the form
+
     const categoryEdit = (category) => {
         let text = 'Are you sure you want to edit this category?'
         window.confirm(text)
