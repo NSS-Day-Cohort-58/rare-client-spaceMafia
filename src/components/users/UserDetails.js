@@ -32,12 +32,12 @@ export const UserDetails = () => {
         [userId]
     )
 
-    return <section className="user-details"> <div className="user-details_title">Rare User Details</div>
-        <button className="btn-all-users"
+    return <section className="user-details"> <div className="user-details_title title is-4 ml-6 mt-5">Rare User Details</div>
+        <button className="btn-all-users button is-medium ml-6"
             onClick={() => navigate(`/users`)}
         >All Users</button>
 
-        <section key={`user--${user.id}`} className="user" to={`/users/${user.id}`}>
+        <section key={`user--${user.id}`} className="user mt-5" to={`/users/${user.id}`}>
             <div className="">
 
                 <div className="user-name">Name: {user.full_name} </div>
@@ -46,8 +46,8 @@ export const UserDetails = () => {
                 <div className="user-creation">Profile Creation Date: {user.user?.date_joined}</div>
                 <div className="user-email">Email: {user.user?.email}</div>
                 <div className="user-bio">Bio: {user.bio}</div>
-                <button className="btn-userSubscribe">Subscribe</button>
-                <button className="btn-userSubscribe">Unsubscribe</button>
+                <button className="btn-userSubscribe ml-5">Subscribe</button>
+                <button className="btn-userSubscribe ml-5 mt-5">Unsubscribe</button>
             </div>
         </section>
     </section >

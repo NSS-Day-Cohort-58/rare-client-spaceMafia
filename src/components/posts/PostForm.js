@@ -114,7 +114,7 @@ export const AddPost = () => {
     }
 
     return <form className="newPostForm">
-        <h2 className="newPostFormTitle title is-4 mt-5 ml-5 mb-5">New Post</h2>
+        <h2 className="newPostFormTitle title is-3 mt-5 ml-5 mb-5">New Post</h2>
         <div className="box post__edit-a">
             <div className="box post__edit-b">
                 <fieldset className="formData">

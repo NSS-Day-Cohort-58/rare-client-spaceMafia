@@ -15,10 +15,10 @@ export const UserList = () => {
         []
     )
 
-    return <section className="user-list"> <div className="user_title">Rare User List</div>
+    return <section className="user-list"> <div className="user_title mb-3">Rare User List</div>
         {
             users.map(user => {
-                return <div key={`user--${user.id}`} className="user">
+                return <div key={`user--${user.id}`} className="user_list box mt-2" >
                     <div className="user-name"><Link to={`/users/${user.id}`}> Name: {user.full_name}</Link></div>
                     <div className="user-username">Username: {user.user.username}</div>
                     <div className="user-email">Email: {user.user.email}</div>

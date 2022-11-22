@@ -1,9 +1,9 @@
-.category__label{
+.category__label {
     display: flex;
     flex-direction: column;
 }
 
-.category{
+.category {
     margin: 0.5rem;
     display: flex;
     border: 2px solid black;
@@ -15,7 +15,7 @@
     font-size: 20px;
 }
 
-.category_title{
+.category_title {
     display: flex;
     font-weight: bolder;
     font-size: 35px;
@@ -32,4 +32,8 @@
 
 .category__buttons {
     margin: 1rem;
+}
+
+.category_list {
+    width: 25%;
 }
