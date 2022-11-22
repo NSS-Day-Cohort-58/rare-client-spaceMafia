@@ -13,7 +13,7 @@ export const PostDetails = () => {
     const [clickStatus, updateClickStatus] = useState(false)
     const [post, setPost] = useState({
         user_id: 0,
-        category_id: 0,
+        category: 0,
         author: 0,
         title: "",
         publication_date: "",
@@ -21,9 +21,6 @@ export const PostDetails = () => {
         content: "",
         approved: true
     })
-
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
 
     const renderPost = () => {
         if (postId) {
@@ -70,13 +67,22 @@ export const PostDetails = () => {
 
                 </section >
                 <footer className="">
-                    <button className="button is-small is-warning" onClick={() => updateClickStatus(true)}>Edit Post</button>
-
                     {
                         post.is_author
-                            ? <button className="btn_delete-post is-danger" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
+                            ? <>
+                                <div>
+                                    <button className="button is-small is-warning mb-1" id="btn_mypost" onClick={() => updateClickStatus(true)}>EDIT</button>
+                                </div>
+                                <div>
+                                    <button className="btn_delete-post button is-small mb-1 is-danger" id="btn_mypost" onClick={(evt) => { confirmDelete(evt, post) }}>DELETE</button>
+                                </div>
+                            </>
                             : <></>
                     }
+
+                    <div>
+                        <button className="btn_delete-post button is-small is-outlined" id="btn_mypost" key={`post-${post.id}`} onClick={() => navigate(`/myPosts`)}>myPosts</button>
+                    </div>
                 </footer>
 
 

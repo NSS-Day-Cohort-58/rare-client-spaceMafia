@@ -1,6 +1,17 @@
+import { useEffect } from "react"
+import { useParams } from "react-router-dom"
 import { saveEditedPost } from "../../managers/PostsManger"
 
 export const PostEdit = ({ post, setPost, renderPost, categories, updateClickStatus }) => {
+
+    const { postId } = useParams()
+
+
+
+    useEffect(() => {
+        renderPost()
+    }, [postId])
+
 
     const handleSave = (event) => {
         event.preventDefault()
@@ -9,8 +20,6 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
             .then(() => updateClickStatus(false))
             .then(() => renderPost())
     }
-
-
 
     const handleCancel = (event) => {
         event.preventDefault()
@@ -47,11 +56,11 @@ export const PostEdit = ({ post, setPost, renderPost, categories, updateClickSta
                             onChange={
                                 (event) => {
                                     const copy = { ...post }
-                                    copy.category.id = parseInt(event.target.value)
+                                    copy.category = parseInt(event.target.value)
                                     setPost(copy)
                                 }}
                             className="form-control select">
-                            <option value={post.category.id}>{post.category.label}</option>
+                            <option value={post.category_id}>{post.category.label}</option>
                             {
                                 categories.map(category => <option
                                     key={category.id}

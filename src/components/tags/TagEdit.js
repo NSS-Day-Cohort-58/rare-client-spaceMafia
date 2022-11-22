@@ -6,9 +6,9 @@ export const TagEdit = () => {
 
     const navigate = useNavigate()
     const { tagId } = useParams()
-    const [newTag, setNewTag] = useState({ label: "" })
+    const [newTag, setNewTag] = useState({ name: "" })
     const [tag, setTag] = useState({
-        label: ""
+        name: ""
     })
 
     const handleSubmit = (event) => {
@@ -16,7 +16,7 @@ export const TagEdit = () => {
 
         const newTag = {
             id: tag.id,
-            label: tag.label
+            name: tag.name
         }
 
         saveEditedTag(newTag)
@@ -45,10 +45,10 @@ export const TagEdit = () => {
         <div className="tag__update field box is-centered">
             <label className="label"><span className="tag__text">Tag Name</span></label>
             <div className="control">
-                <input className="input" type="text" placeholder={tag.label}
+                <input className="input" type="text" placeholder={tag.name}
                     onChange={(e) => {
                         const copy = { ...tag }
-                        copy.label = e.target.value
+                        copy.name = e.target.value
                         setTag(copy)
                     }} />
                 <div className="field">

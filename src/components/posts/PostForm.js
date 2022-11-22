@@ -6,12 +6,10 @@ import { getTags } from "../../managers/TagManager"
 
 export const AddPost = () => {
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
 
     const [newPost, updateNewPost] = useState({
-        author_id: 1,
-        category_id: 0,
+        author: 1,
+        category: 0,
         title: "",
         publication_date: "",
         image_url: "",
@@ -70,8 +68,8 @@ export const AddPost = () => {
         evt.preventDefault()
 
         const newPostToSendToAPI = {
-            author_id: evt.author.id,
-            category_id: categoryId,
+            author_id: evt.author,
+            category: categoryId,
             title: newPost.title,
             publication_date: today,
             image_url: newPost.image_url,
@@ -79,9 +77,9 @@ export const AddPost = () => {
             approved: true
         }
 
-        const postTagsToSendToAPI = {
-            tag_id: postTag.tag_id
-        }
+        // const postTagsToSendToAPI = {
+        //     tag_id: postTag.tag_id
+        // }
 
         fetch('http://localhost:8000/posts', {
             method: "POST",
@@ -92,25 +90,27 @@ export const AddPost = () => {
             body: JSON.stringify(newPostToSendToAPI)
         })
             .then(response => response.json())
-            .then(parsedResponse => {
-                postTagsToSendToAPI.post_id = parsedResponse.id
-                return fetch(`http://localhost:8000/postTags`, {
-                    method: "POST",
-                    headers: {
-                        "Content-type": "application/json",
-                        "Authorization": `Token ${localStorage.getItem("auth_token")}`
-                    },
-                    body: JSON.stringify(postTagsToSendToAPI)
-                })
-                    .then(response => response.json())
-                    .then(() => {
-                        getNewPost()
-                    })
-                    .then(response => response.json())
-                    .then(() => {
-                        getNewPost()
-                    })
-            })
+            .then(() => navigate("/posts"))
+
+        // .then(parsedResponse => {
+        //     postTagsToSendToAPI.post_id = parsedResponse.id
+        //     return fetch(`http://localhost:8000/postTags`, {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-type": "application/json",
+        //             "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        //         },
+        //         body: JSON.stringify(postTagsToSendToAPI)
+        //     })
+        //         .then(response => response.json())
+        //         .then(() => {
+        //             getNewPost()
+        //         })
+        //         .then(response => response.json())
+        //         .then(() => {
+        //             getNewPost()
+        //         })
+        // })
     }
 
     return <form className="newPostForm">

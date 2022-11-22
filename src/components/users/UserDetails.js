@@ -18,7 +18,12 @@ export const UserDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8000/users/${userId}`)
+            fetch(`http://localhost:8000/users/${userId}`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("auth_token")}`
+
+                }
+            })
                 .then(res => res.json())
                 .then((userArray) => {
                     setUsers(userArray)
@@ -33,14 +38,17 @@ export const UserDetails = () => {
         >All Users</button>
 
         <section key={`user--${user.id}`} className="user" to={`/users/${user.id}`}>
-            <div className="user-name">Name: {user.author?.full_name} </div>
-            <div className="user-username">Username: {user.username}</div>
-            <img className="user-image" src={user.author?.profile_image} />
-            <div className="user-creation">Profile Creation Date: {user.date_joined}</div>
-            <div className="user-email">Email: {user.email}</div>
-            <div className="user-bio">Bio: {user.author?.bio}</div>
-            <button className="btn-userSubscribe">Subscribe</button>
-            <button className="btn-userSubscribe">Unsubscribe</button>
+            <div className="">
+
+                <div className="user-name">Name: {user.full_name} </div>
+                <div className="user-username">Username: {user.user?.username}</div>
+                {/* <img className="user-image" src={user.author?.profile_image} /> */}
+                <div className="user-creation">Profile Creation Date: {user.user?.date_joined}</div>
+                <div className="user-email">Email: {user.user?.email}</div>
+                <div className="user-bio">Bio: {user.bio}</div>
+                <button className="btn-userSubscribe">Subscribe</button>
+                <button className="btn-userSubscribe">Unsubscribe</button>
+            </div>
         </section>
     </section >
 }
