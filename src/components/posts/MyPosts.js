@@ -81,11 +81,11 @@ export const MyPosts = () => {
     }
 
     return <article className="allPosts">
-        <h2 className="postsHeader title is-4">My Posts: </h2>
+        <h2 className="postsHeader title is-3">My Posts: </h2>
         <fieldset>
             <div className="dropDown">
-                <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
-                <select className="editDropDown"
+                <label htmlFor="filterCategory" className="dropDownCategories mr-3">Choose Your Category:</label>
+                <select className="editDropDown select"
                     onChange={(evt) => {
                         setCategoryId(parseInt(evt.target.value))
                     }}

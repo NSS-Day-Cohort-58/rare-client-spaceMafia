@@ -132,24 +132,3 @@ export const MyPostEdit = () => {
         </article>
     </>
 }
-
-
-{/* <button type="submit"
-    onClick={evt => {
-        // Prevent form from being submitted
-        evt.preventDefault()
-
-        const event = {
-            id: currentEvent.id,
-            organizer: currentEvent.organizer,
-            description: currentEvent.description,
-            game: currentEvent.game,
-            date: currentEvent.date,
-            time: currentEvent.time
-        }
-
-        // Send POST request to your API
-        saveEditedEvent(event)
-            .then(() => navigate("/events"))
-    }}
-    className="button is-primary ml-6">Update Event</button> */}
