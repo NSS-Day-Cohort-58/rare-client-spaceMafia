@@ -37,3 +37,14 @@ export const saveEditedTag = (tag) => {
         body: JSON.stringify(tag)
     })
 }
+
+export const deleteTag = (id) => {
+    return fetch(`http://localhost:8000/tags/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "Authorization": `Token ${localStorage.getItem("auth_token")}`
+        }
+    })
+}

@@ -20,8 +20,8 @@ export const UserList = () => {
             users.map(user => {
                 return <div key={`user--${user.id}`} className="user">
                     <div className="user-name"><Link to={`/users/${user.id}`}> Name: {user.full_name}</Link></div>
-                    <div className="user-username">Username: {user.username}</div>
-                    <div className="user-email">Email: {user.email}</div>
+                    <div className="user-username">Username: {user.user.username}</div>
+                    <div className="user-email">Email: {user.user.email}</div>
                 </div>
 
             })
