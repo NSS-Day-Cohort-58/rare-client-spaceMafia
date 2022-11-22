@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { getCategories } from "../../managers/CategoryManager"
 import { deletePost, getPosts } from "../../managers/PostsManger"
@@ -16,9 +16,6 @@ export const MyPosts = () => {
 
     const navigate = useNavigate()
 
-    const localForumUser = localStorage.getItem("forum_user")
-    const forumUserObject = JSON.parse(localForumUser)
-
     useEffect(
         () => {
             getPosts()
@@ -31,7 +28,7 @@ export const MyPosts = () => {
 
     useEffect(
         () => {
-            const myPosts = allPosts.filter(allPost => allPost.is_author === true)
+            const myPosts = allPosts.filter(allPost => allPost.is_author)
             setFilteredPosts(myPosts)
         },
         [allPosts]
@@ -77,12 +74,14 @@ export const MyPosts = () => {
         let text = 'Are you sure you want to delete'
         // whenever confirmed by clicking OK/Cancel window.confirm() returns boolean 
         window.confirm(text)
-            ? deletePost(dateSortedPost.id).then(() => navigate("/posts"))
+            ? deletePost(dateSortedPost.id)
+                .then(() => getPosts()
+                    .then(data => setAllPosts(data)))
             : <></>
     }
 
     return <article className="allPosts">
-        <h2 className="postsHeader">{allUsers.full_name}'s Posts: </h2>
+        <h2 className="postsHeader title is-4">My Posts: </h2>
         <fieldset>
             <div className="dropDown">
                 <label htmlFor="filterCategory" className="dropDownCategories">Choose Your Category:</label>
@@ -106,8 +105,8 @@ export const MyPosts = () => {
         {
             dateSortedPosts.map(
                 (dateSortedPost) => {
-                    if (dateSortedPost.category_id === categoryId || categoryId === 0)
-                        return <>
+                    if (dateSortedPost.category.id === categoryId || categoryId === 0)
+                        return <React.Fragment key={`posts--${dateSortedPost.id}`}>
                             <div className=" columns box" id="post__myPost">
                                 <section className="postDetails column" key={`post--${dateSortedPost.id}`}>
                                     <div className="titleDiv"><Link className="" to={`/posts/${dateSortedPost.id}`}>Title: {dateSortedPost.title}</Link></div>
@@ -127,13 +126,18 @@ export const MyPosts = () => {
                                     <footer className="postFooter has-text-left" >Date: {dateSortedPost.publication_date}</footer>
                                 </section>
                                 <footer className="cardButtons">
-                                    <button>
-                                        Edit Post
-                                    </button>
-                                    <button className="btn_delete-post " key={`post-${dateSortedPost.id}`} onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>Delete Post </button>
+                                    <div>
+                                        <button className=" button is-small is-warning mb-1" id="btn_mypost" onClick={() => navigate(`/myPost/edit/${dateSortedPost.id}`)}>
+                                            EDIT
+                                        </button>
+                                    </div>
+                                    <div>
+                                        <button className="btn_delete-post button is-small is-danger" id="btn_mypost" key={`post-${dateSortedPost.id}`} onClick={(evt) => { confirmDelete(evt, dateSortedPost) }}>DELETE</button>
+                                    </div>
+
                                 </footer>
                             </div>
-                        </>
+                        </React.Fragment>
                 }
             )
         }

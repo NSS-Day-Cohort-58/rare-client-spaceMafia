@@ -18,7 +18,12 @@ export const UserDetails = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8000/users/${userId}`)
+            fetch(`http://localhost:8000/users/${userId}`, {
+                headers: {
+                    "Authorization": `Token ${localStorage.getItem("auth_token")}`
+
+                }
+            })
                 .then(res => res.json())
                 .then((userArray) => {
                     setUsers(userArray)
